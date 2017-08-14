@@ -26,6 +26,12 @@
         ]
     },
     "devDependencies": {
-        "gulp": "^3.9.1"
+        "ecstatic": "^2.2.1",
+        "gulp": "^3.9.1",
+        "gulp-livereload": "^3.8.1",
+        "gulp-util": "^3.0.8",
+        "gulp-watch": "^4.3.11",
+        "http": "0.0.0",
+        "livereload": "^0.6.2"
     }
 }
