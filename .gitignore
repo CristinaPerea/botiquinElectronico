@@ -3,3 +3,6 @@
 /botiquinElectronicoFrontend/.idea
 /botiquinElectronicoFrontend/.idea/*
 /botiquinElectronicoFrontend/node_modules/
+/botiquinElectronicoFrontend/node_modules/*
+/botiquinElectronicoFrontend/platforms/
+/botiquinElectronicoFrontend/platforms/*
