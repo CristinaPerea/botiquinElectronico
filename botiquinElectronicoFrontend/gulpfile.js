@@ -28,8 +28,7 @@ gulp.task('server', function() {
         root: "platforms/browser/www/",
         cache: 0
     })).listen(port);
-
-    gutil.log(gutil.colors.blue("HTTP server listening on " + port));
+    gutil.log(gutil.colors.red("HTTP server listening on " + port));
 });
 
 // default - start everything
