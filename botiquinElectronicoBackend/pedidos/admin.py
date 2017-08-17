@@ -1,3 +1,5 @@
 from django.contrib import admin
+from pedidos.models import PedidosSinReceta, PedidosConReceta
 
-# Register your models here.
+admin.site.register(PedidosSinReceta)
+admin.site.register(PedidosConReceta)
