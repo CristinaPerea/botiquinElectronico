@@ -26,3 +26,4 @@ class Pendiente(models.Model):
     id_pedido_sin_receta = models.ForeignKey(PedidosSinReceta, blank=True, null=True)
     fecha_pedido = models.DateField()
     fecha_expiracion = models.DateField()
+    
