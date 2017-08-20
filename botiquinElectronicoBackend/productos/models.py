@@ -9,6 +9,8 @@ class Producto(models.Model):
     con_receta = models.BooleanField()
     duracion = models.IntegerField()
     descripcion = models.TextField()
+    descripcion_html = models.TextField()
+    precio = models.CharField(max_length=100)
 
     def __str__(self):
         return self.nombre_producto
