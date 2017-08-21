@@ -11,5 +11,5 @@ def buscar(busqueda):
     # for result in results:
     #     print(result)
     print(results)
-    print(len(results))
+    print('Resultado: ' + str(len(results)))
 buscar('Comentarios')
