@@ -7,16 +7,15 @@ import random
 
 from whoosh.fields import Schema, TEXT, ID
 from whoosh.index import create_in, open_dir
-from whoosh.qparser import QueryParser
-from whoosh.writing import BufferedWriter
 
-'''Definición de URL base'''
+
+#Definición de URL base
 url_base = 'http://www.hipocrates.com/vademe/'
 url_base_medicamentos = url_base + 'sacapros.phtml?n='
 
-''' Función que devuelve todos los enlaces a las distintas web donde se encuentran los medicamentos
-ordenados por letras de inicio'''
 def lista_letras(url_base):
+    '''Función que devuelve todos los enlaces a las distintas web donde se encuentran los medicamentos
+    ordenados por letras de inicio'''
     print("Obteniedo enlaces de letras")
     request = Request(url_base + '/sacamedi.phtml', headers={'User-Agent': 'Mozilla/5.0'})
     url = urlopen(request)
@@ -29,8 +28,8 @@ def lista_letras(url_base):
     print("Obteniedo enlaces de letras")
     return enlaces_letras
 
-''' Función que devuelve todos los enlaces a los medicamentos que se encuentran categorizados por letra de inicio'''
 def obtiene_enlaces_medicamentos(enlaces_letras, url_base):
+    '''Función que devuelve todos los enlaces a los medicamentos que se encuentran categorizados por letra de inicio'''
     print("Obteniedo enlaces de medicamentos")
     enlaces_medicamentos = []
     lista_enlaces_completos = []
@@ -53,9 +52,9 @@ def obtiene_enlaces_medicamentos(enlaces_letras, url_base):
                             enlaces_medicamentos.append(enlace)
     return enlaces_medicamentos
 
-''' Función que devuelve los íncides únicos de cada uno de los medicamentos para posteriormente formar la url de la que
-se tomarán los datos de dichos medicamentos'''
 def obtiene_indice_medicamento(url_base, enlaces_medicamentos):
+    '''Función que devuelve los íncides únicos de cada uno de los medicamentos para posteriormente formar la url de la que
+    se tomarán los datos de dichos medicamentos'''
     print("Obteniedo indices de medicamentos")
     lista_ids = []
     fichero_indices = open('indices.txt', 'w')
@@ -81,9 +80,9 @@ def obtiene_indice_medicamento(url_base, enlaces_medicamentos):
     fichero_indices.close()
     return lista_ids
 
-''' Función que obtiene los detalles del medicamento mediente la lectura de los íncides que se han obtenido anteriormente.
- Estos detalles se guardarán en un fichero output.txt'''
-def obtiene_detalles_medicamentos(url_base_medicamentos, lista_ids):
+def obtiene_detalles_medicamentos(url_base_medicamentos):
+    '''Función que obtiene los detalles del medicamento mediente la lectura de los íncides que se han obtenido anteriormente.
+     Estos detalles se guardarán en un fichero output.txt'''
     contador_errores = 0
     fichero_output = open('output.txt', 'wt')
     lista_ids = open('indices.txt', 'r')
@@ -115,9 +114,8 @@ def obtiene_detalles_medicamentos(url_base_medicamentos, lista_ids):
     print('Finalizado con: ' + contador_errores + " errores")
 
 def almacena_medicamentos():
+    ''' Almacena los medicamentos en la base de datos y genera un índice'''
     schema = Schema(nombre_producto=TEXT(stored=True), descripcion=TEXT(stored=True), id=ID(stored=True), descripcion_html=TEXT(stored=True))
-
-    # INDICE
     if not os.path.exists("index"):
         os.mkdir("index")
     ix = create_in("index", schema)
@@ -151,6 +149,7 @@ def almacena_medicamentos():
     conn.close()
 
 def insertar_medicamento(conn, cursor, nombre, precio, descripcion, descripcion_html, lista_url_medicamento):
+    '''Inserta el medicamento con sus propiedades en la base de datos'''
     foto_producto = random.choice(lista_url_medicamento)
     con_receta = bool(random.getrandbits(1))
     duraciones = [15, 30, 60]
@@ -163,12 +162,14 @@ def insertar_medicamento(conn, cursor, nombre, precio, descripcion, descripcion_
 
 
 def insertar_en_indice(nombre, descripcion, descripcion_html, id, ix):
+    '''Función que inserta en el índice de Whoosh el producto'''
     writer = ix.writer()
     writer.add_document(nombre_producto=nombre, descripcion=descripcion, id=str(id), descripcion_html=descripcion_html)
     writer.commit()
 
 
 def lista_urls_fotos():
+    '''Función que devuelve una lista con las urls de las imágenes obtenidas de un fichero'''
     lista_urls_fotos = []
     fichero = open('urls_fotos_medicamentos.txt', 'r')
     for linea in fichero:
@@ -177,47 +178,15 @@ def lista_urls_fotos():
     return lista_urls_fotos
 
 ''' Función para extraer todas las letras disponibles '''
-# enlaces_letras = lista_letras(url_base)
+enlaces_letras = lista_letras(url_base)
 ''' Función para obtener los enlaces a los medicamentos de cada una de las letras '''
-# enlaces_medicamentos = obtiene_enlaces_medicamentos(enlaces_letras, url_base)
+enlaces_medicamentos = obtiene_enlaces_medicamentos(enlaces_letras, url_base)
 ''' Función para extraer todos los identificadoes de la web para construir la URL de cada producto '''
-# lista_ids = obtiene_indice_medicamento(url_base, enlaces_medicamentos)
+lista_ids = obtiene_indice_medicamento(url_base, enlaces_medicamentos)
 ''' Función para extraer los prospectos dado el identificador extraido en la función obtiene_indice_medicamento'''
-# lista_ids = []
-# obtiene_detalles_medicamentos(url_base_medicamentos, lista_ids)
-# almacena_medicamentos()
+obtiene_detalles_medicamentos(url_base_medicamentos)
+''' Función que almacena los medicamentos en la base de datos y crea el índice de Whoosh'''
+almacena_medicamentos()
 
-def indexarDatos(cursor):
-    schema = Schema(nombre_producto=TEXT(stored=True), descripcion=TEXT(stored=True), id=ID(stored=True),
-                    descripcion_html=TEXT(stored=True))
-    # INDICE
-    if not os.path.exists("index"):
-        os.mkdir("index")
-    ix = create_in("index", schema)
-    contador = 1
-    writer = BufferedWriter(ix, limit=10)
-    for row in cursor:
-        writer.add_document(nombre_producto=row[1], descripcion=row[2], id=str(row[0]), descripcion_html=row[3])
-        if contador % 100 == 0:
-            print("Commiteados elementos " + str(contador) + " elementos")
-        contador += 1
-    writer.close()
 
-def crea_indice_roto():
-    conn = sqlite3.connect("../db.sqlite3")
-    cursor = conn.execute("""SELECT id, nombre_producto, descripcion, descripcion_html FROM productos_producto""")
-    indexarDatos(cursor)
-    conn.close()
 
-# def buscar(busqueda):
-#     ix = open_dir("index")
-#     searcher = ix.searcher()
-#     parser = QueryParser("descripcion", ix.schema)
-#     myquery = parser.parse(busqueda)
-#     results = searcher.search(myquery, limit=None)
-#     for result in results:
-#         print(result)
-#     print(len(results))
-# buscar('Comentarios')
-
-crea_indice_roto()
