@@ -1,6 +1,7 @@
 /botiquinElectronicoBackend/.idea
 /botiquinElectronicoBackend/.idea/*
 /botiquinElectronicoBackend/db.sqlite3
+/botiquinElectronicoBackend/*/__pycache__/
 /botiquinElectronicoBackend/scrapper/index/*
 /botiquinElectronicoBackend/scrapper/indices.txt
 /botiquinElectronicoBackend/scrapper/output.txt
@@ -11,3 +12,13 @@
 /botiquinElectronicoFrontend/platforms/
 /botiquinElectronicoFrontend/platforms/*
 /.vscode
+botiquinElectronicoBackend/users/migrations/__pycache__/0001_initial.cpython-35.pyc
+botiquinElectronicoBackend/productos/migrations/__pycache__/__init__.cpython-35.pyc
+botiquinElectronicoBackend/productos/migrations/__pycache__/0004_producto_descripcion_html.cpython-35.pyc
+botiquinElectronicoBackend/productos/migrations/__pycache__/0003_producto_precio.cpython-35.pyc
+botiquinElectronicoBackend/productos/migrations/__pycache__/0002_pendiente.cpython-35.pyc
+botiquinElectronicoBackend/productos/migrations/__pycache__/0001_initial.cpython-35.pyc
+botiquinElectronicoBackend/pedidos/migrations/__pycache__/__init__.cpython-35.pyc
+botiquinElectronicoBackend/pedidos/migrations/__pycache__/0001_initial.cpython-35.pyc
+botiquinElectronicoBackend/users/migrations/__pycache__/__init__.cpython-35.pyc
+botiquinElectronicoBackend/users/migrations/__pycache__/0002_auto_20170817_2006.cpython-35.pyc
