@@ -1,5 +1,9 @@
 /botiquinElectronicoBackend/.idea
 /botiquinElectronicoBackend/.idea/*
+/botiquinElectronicoBackend/db.sqlite3
+/botiquinElectronicoBackend/scrapper/index/*
+/botiquinElectronicoBackend/scrapper/indices.txt
+/botiquinElectronicoBackend/scrapper/output.txt
 /botiquinElectronicoFrontend/.idea
 /botiquinElectronicoFrontend/.idea/*
 /botiquinElectronicoFrontend/node_modules/
