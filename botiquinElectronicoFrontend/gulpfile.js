@@ -23,7 +23,7 @@ gulp.task('watch', function() {
 });
 
 gulp.task('server', function() {
-    var port = 8000;
+    var port = 8080;
     var url = "http://localhost:" + port + "/";
     http.createServer(ecstatic({
         root: "platforms/browser/www/",
