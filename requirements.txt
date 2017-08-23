@@ -2,6 +2,7 @@ beautifulsoup4==4.6.0
 Django==1.11.4
 django-cors==0.1
 django-cors-headers==2.1.0
+django-filter==1.0.4
 djangorestframework==3.6.3
 pytz==2017.2
 selenium==3.5.0
