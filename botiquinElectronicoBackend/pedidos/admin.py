@@ -5,10 +5,10 @@ from django import forms
 from productos.models import ProductoEnStock
 
 admin.site.register(PedidosSinReceta)
-
-class ProductoEnStockInline(admin.TabularInline):
-    model = ProductoEnStock
-    exclude = ['id_pedido_sin_receta']
+#
+# class ProductoEnStockInline(admin.TabularInline):
+#     model = ProductoEnStock
+#     exclude = ['id_pedido_sin_receta']
 
     # def __init__(self, *args, **kwargs):
     #     super(ProductoEnStockInline, self).__init__(*args, **kwargs)
@@ -34,4 +34,10 @@ class ProductoEnStockInline(admin.TabularInline):
 #     ]
 
 # admin.site.register(PedidosConReceta, PedidosConRecetaAdmin)
-admin.site.register(PedidosConReceta)
+
+class PedidosConRecetaAdmin(admin.ModelAdmin):
+    model = PedidosConReceta
+    exclude = []
+    search_fields = ('cliente__last_name', 'cliente__first_name')
+
+admin.site.register(PedidosConReceta, PedidosConRecetaAdmin)
