@@ -28,6 +28,7 @@
     "devDependencies": {
         "ecstatic": "^2.2.1",
         "gulp": "^3.9.1",
+        "gulp-inject": "^4.2.0",
         "gulp-livereload": "^3.8.1",
         "gulp-util": "^3.0.8",
         "gulp-watch": "^4.3.11",
