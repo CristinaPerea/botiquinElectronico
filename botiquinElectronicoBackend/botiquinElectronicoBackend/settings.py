@@ -31,6 +31,9 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'material.theme.teal',
+    'material',
+    'material.admin',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -45,7 +48,7 @@ INSTALLED_APPS = [
     'rest_framework',
     # CORS
     'corsheaders',
-    'django_filters'
+    'django_filters',
 ]
 
 MIDDLEWARE = [
