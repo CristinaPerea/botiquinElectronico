@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from pedidos.models import PedidosSinReceta
+from pedidos.models import PedidosSinReceta, PedidosConReceta
 from productos.serializers import ProductoEnStockSerializer
 
 from users.models import Cliente
@@ -11,6 +11,17 @@ class PedidosSinRecetaSerializer(serializers.ModelSerializer):
         model = PedidosSinReceta
         exclude = []
         fields = ["id", "fecha_pedido", "fecha_entrega", "modificado", "cliente", "productos_en_stock"]
+
+
+class PedidosConRecetaSerializer(serializers.ModelSerializer):
+    productos_en_stock = ProductoEnStockSerializer(many=True)
+
+    class Meta():
+        model = PedidosConReceta
+        exclude = []
+        fields = ["id", "cliente", "productos_en_stock"]
+
+
     #
     # id = serializers.ReadOnlyField()  # Sólo queremos que sea de lectura (nunca escribir)
     # id_cliente = serializers.RelatedField(source='cliente', read_only=True)

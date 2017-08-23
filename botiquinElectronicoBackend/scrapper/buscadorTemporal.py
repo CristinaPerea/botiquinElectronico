@@ -7,9 +7,7 @@ def buscar(busqueda):
     searcher = ix.searcher()
     parser = QueryParser("descripcion", ix.schema)
     myquery = parser.parse(busqueda)
-    results = searcher.search(myquery, limit=None)
-    # for result in results:
-    #     print(result)
+    results = searcher.search(myquery, limit=50)
     print(results)
     print('Resultado: ' + str(len(results)))
-buscar('Comentarios')
+buscar('pulmonar')

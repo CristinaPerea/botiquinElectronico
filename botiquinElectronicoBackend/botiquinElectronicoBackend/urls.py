@@ -17,14 +17,17 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.authtoken import views
 
+from productos.api import BuscaProspectoAPI
 from users.views import LogoutAPI
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^api/v1/users/', include('users.urls')),
-    url(r'^api/v1/pedidos_sin_receta/', include('pedidos.urls')),
+    url(r'^api/v1/', include('pedidos.urls')),
+    url(r'^api/v1/', include('pedidos.urls')),
     url(r'^api/v1/productos/', include('productos.urls')),
     # API Rest login
     url(r'^api/v1/login', views.obtain_auth_token, name="users_api_login"),
     url(r'^api/v1/logout', LogoutAPI.as_view(), name="users_api_logout"),
+    url(r'^api/v1/busca_prospecto', BuscaProspectoAPI.as_view(), name='busca_prospecto')
 ]

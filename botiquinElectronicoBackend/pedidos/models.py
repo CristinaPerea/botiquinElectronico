@@ -9,6 +9,8 @@ class PedidosSinReceta(models.Model):
     fecha_entrega = models.DateField(blank=True, null=True)
     modificado = models.DateField(auto_now=True)
 
+    def __str__(self):
+        return str(self.fecha_pedido) + ' / ' + self.cliente.first_name + self.cliente.last_name
 
 # Clase de pedidos con receta
 class PedidosConReceta(models.Model):
