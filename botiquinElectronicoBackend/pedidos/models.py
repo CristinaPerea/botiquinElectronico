@@ -1,5 +1,7 @@
 from django.core.validators import MaxValueValidator
 from django.db import models
+
+from productos.models import ProductoEnStock
 from users.models import Cliente
 
 # Clase de pedidos sin receta
@@ -14,3 +16,4 @@ class PedidosSinReceta(models.Model):
 class PedidosConReceta(models.Model):
     cliente = models.OneToOneField(Cliente, on_delete=models.CASCADE)
     pedido_tramitado = models.BooleanField()
+    # productos_en_stock = models.ManyToOneRel(ProductoEnStock)
