@@ -18,7 +18,7 @@ class Producto(models.Model):
 class ProductoEnStock(models.Model):
     id_producto = models.ForeignKey(Producto)
     id_pedido_con_receta = models.ForeignKey(PedidosConReceta, blank=True, null=True)
-    id_pedido_sin_receta = models.ForeignKey(PedidosSinReceta, blank=True, null=True)
+    id_pedido_sin_receta = models.ForeignKey(PedidosSinReceta, blank=True, null=True, related_name='productos_en_stock')
     fecha_pedido = models.DateField()
     fecha_expiracion = models.DateField()
 

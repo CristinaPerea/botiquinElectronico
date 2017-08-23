@@ -21,7 +21,9 @@ from users.views import LogoutAPI
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('users.urls')),
+    url(r'^api/v1/users/', include('users.urls')),
+    url(r'^api/v1/pedidos_sin_receta/', include('pedidos.urls')),
+    url(r'^api/v1/productos/', include('productos.urls')),
     # API Rest login
     url(r'^api/v1/login', views.obtain_auth_token, name="users_api_login"),
     url(r'^api/v1/logout', LogoutAPI.as_view(), name="users_api_logout"),

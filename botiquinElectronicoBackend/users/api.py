@@ -4,7 +4,7 @@ from rest_framework.response import Response
 from users.models import Cliente
 from users.permissions import ClientePermission
 from users.serializers import ClienteSerializer, ClienteSerializerConPassword
-
+from django.shortcuts import get_object_or_404
 
 class ClienteViewSet(GenericViewSet):
     permission_classes = [ClientePermission]
@@ -45,3 +45,10 @@ class ClienteViewSet(GenericViewSet):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+    def retrieve(self, request, pk):
+        user = get_object_or_404(Cliente, pk=pk)
+        self.check_object_permissions(request, user)  # compruebo si el usuario autenticado puede hacer GET en este user
+        serializer = ClienteSerializer(user)
+        return Response(serializer.data)
