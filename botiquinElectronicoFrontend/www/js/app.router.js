@@ -11,7 +11,7 @@ angular.module('app').config(function($stateProvider, $mdThemingProvider) {
     var dos = {
         url: '/dos',
         component: 'testComponentDos'
-    }
+    };
 
     $stateProvider.state('home', home);
     $stateProvider.state('dos', dos);
