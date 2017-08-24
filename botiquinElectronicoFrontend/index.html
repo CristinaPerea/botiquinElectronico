@@ -4,71 +4,16 @@
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="www/css/index.css">
         <title>Hello World</title>
         <!-- inject:css -->
         <!-- endinject -->
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
-        <div ng-app="angularTest">
-            <div ng-controller="AppCtrl" layout="column" style="height: 500px;" ng-cloak>
-
-                <section layout="row" flex>
-
-                    <md-sidenav class="md-sidenav-left" md-component-id="left"
-                                md-disable-backdrop md-whiteframe="4">
-
-                        <md-toolbar class="md-theme-indigo">
-                            <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
-                        </md-toolbar>
-
-                        <md-content layout-margin>
-                            <p>
-                                This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
-                            </p>
-                            <md-button ng-click="toggleLeft()" class="md-accent">
-                                Close this Sidenav
-                            </md-button>
-                        </md-content>
-
-                    </md-sidenav>
-
-                    <md-content flex layout-padding>
-
-                        <div layout="column" layout-align="top center">
-                            <p>
-                                Developers can also disable the backdrop of the sidenav.<br/>
-                                This will disable the functionality to click outside to close the sidenav.
-                            </p>
-
-                            <div>
-                                <md-button ng-click="toggleLeft()" class="md-raised">
-                                    Toggle Sidenav
-                                </md-button>
-                            </div>
-
-                        </div>
-
-                    </md-content>
-
-                </section>
-
-            </div>
-            <h1>Prueba:</h1>
-            <test-component></test-component>
-            <md-button class="md-raised">Button</md-button>
-        </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-        <script src="http://localhost:35729/livereload.js" type="text/javascript"></script>
         <!-- inject:js -->
         <!-- endinject -->
+    </head>
+    <body>
+        <div ng-app="app">
+           <app-root></app-root>
+        </div>
+        <script src="http://localhost:35729/livereload.js" type="text/javascript"></script>
     </body>
 </html>

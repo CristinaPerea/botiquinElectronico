@@ -7,12 +7,17 @@ var http = require('http');
 var ecstatic = require('ecstatic');
 var inject = require('gulp-inject');
 var del = require('del');
+var wait = require('gulp-wait');
 
 var watchGlob = 'index.html';
 var resources = 'www/**/*.{js,html,css}';
 var iosDest = 'platforms/browser/';
-var libreriasCSS = ['node_modules/angular-material/angular-material.css'];
-var injectOrderLibreriasCSS = ['www/vendor/angular-material.css'];
+var libreriasCSS = ['node_modules/angular-material/angular-material.css',
+    'node_modules/material-design-icons/iconfont/*'];
+
+var injectOrderLibreriasCSS = ['www/vendor/material-icons.css',
+    'www/vendor/angular-material.css',
+    'www/vendor/MaterialIcons*'];
 
 var librerias = ['node_modules/@uirouter/angularjs/release/angular-ui-router.js',
     'node_modules/angular/angular.js',
@@ -36,9 +41,9 @@ gulp.task('clean', function() {
 });
 
 gulp.task('update', function() {
-    console.log('updating...');
     return gulp.src(resources)
-        .pipe(gulp.dest(iosDest + '/www'))
+           .pipe(gulp.dest(iosDest + '/www'))
+        .pipe(wait(1500))
         .pipe(livereload());
 });
 
@@ -59,6 +64,7 @@ gulp.task('indexJS', ['prepararLibrerias'], function () {
     console.log('Generating JS');
     var target = gulp.src('./platforms/browser/index.html');
     var appJS = ['./www/js/*.module.js',
+        './www/js/*.router.js',
         './www/js/**/*.controller.js',
         './www/js/**/*.component.js',
         './www/js/**/*.js'];
@@ -73,6 +79,7 @@ gulp.task('indexJSSinLibrerias', function () {
     console.log('Generating JS');
     var target = gulp.src('./platforms/browser/index.html');
     var appJS = ['./www/js/*.module.js',
+        './www/js/*.router.js',
         './www/js/**/*.controller.js',
         './www/js/**/*.component.js',
         './www/js/**/*.js'];
@@ -83,10 +90,14 @@ gulp.task('indexJSSinLibrerias', function () {
         .pipe(gulp.dest('./platforms/browser/'));
 });
 
-gulp.task('indexSASS', ['prepararLibreriasCSS'], function() {
+gulp.task('copiaFuentesMaterial', function() {
+    return gulp.src(['./www/vendor/Material*.*']).pipe(gulp.dest('./platforms/browser/www/vendor'));
+});
+
+gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial'], function() {
     console.log('Generating Sass');
     var target = gulp.src('./platforms/browser/index.html');
-    var appCSS = ['./www/**/*.css'];
+    var appCSS = ['./www/css/*.css'];
     var injectCSS = injectOrderLibreriasCSS.concat(appCSS);
     var sources = gulp.src(injectCSS, {read: false});
     return target.pipe(inject(sources))
@@ -105,7 +116,6 @@ gulp.task('indexSASSSinLibrerias', function() {
 
 
 gulp.task('watch', function() {
-    // start the livereload server
     livereload.listen();
     gulp.watch(resources, ['indexJSSinLibrerias', 'indexSASSSinLibrerias', 'update']);
 });

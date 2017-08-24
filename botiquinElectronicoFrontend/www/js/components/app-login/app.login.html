@@ -1,0 +1,18 @@
+<md-input-container class="md-icon-float md-block">
+    <!-- Username -->
+    <md-icon>
+        <i class="material-icons">person</i>
+    </md-icon>
+    <input ng-model="user.name" type="text" placeholder="Nombre de usuario">
+</md-input-container>
+<md-input-container class="md-icon-float md-block">
+    <!-- Password -->
+    <md-icon>
+        <i class="material-icons">security</i>
+    </md-icon>
+    <input ng-model="user.password" type="password" placeholder="Password">
+</md-input-container>
+<md-button class="md-raised md-primary" data-ng-click="login()">Entrar</md-button>
+<p>Token de sesión: </p>
+<p>{{ token }}</p>
+{{ resultado | json }}

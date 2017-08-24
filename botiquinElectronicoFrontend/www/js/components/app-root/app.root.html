@@ -1,0 +1,44 @@
+<div ng-controller="AppCtrl" layout="column" style="height: 500px;" ng-cloak>
+
+    <section layout="row" flex>
+
+        <md-sidenav class="md-sidenav-left" md-component-id="left"
+                    md-whiteframe="4">
+
+            <md-toolbar class="md-theme-indigo">
+                <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
+            </md-toolbar>
+
+            <md-content layout-margin>
+                <p>
+                    This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+                </p>
+                <md-button ng-click="toggleLeft()" class="md-accent">
+                    Close this Sidenav
+                </md-button>
+                <a ui-sref="home">
+                    <md-button class="md-accent">
+                        Navega al home
+                    </md-button>
+                </a>
+                <a ui-sref="dos">
+                    <md-button class="md-accent">
+                        Navega al dos
+                    </md-button>
+                </a>
+                <md-button data-ng-click="logout()" class="md-accent">
+                    Logout
+                </md-button>
+            </md-content>
+
+        </md-sidenav>
+        <div data-ng-if="!tengoToken">
+            <login-component></login-component>
+        </div>
+        <md-content flex layout-padding data-ng-if="tengoToken">
+            <ui-view></ui-view>
+        </md-content>
+
+    </section>
+
+</div>
