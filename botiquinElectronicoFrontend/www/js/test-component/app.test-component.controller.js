@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 angular.module("angularTest").controller("TestController", ['$http', '$scope', function($http, $scope) {
     $scope.cliente = '';
@@ -12,8 +12,8 @@ angular.module("angularTest").controller("TestController", ['$http', '$scope', f
         method: 'GET',
         headers : cabecera
     };
-
     $http(peticion).then(function(success) {
-       $scope.cliente = success.data;
+        success.data[0].nuevoMensaje = "amolsito!";
+        $scope.cliente = success.data;
     });
 }]);

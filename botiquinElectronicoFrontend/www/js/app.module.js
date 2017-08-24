@@ -1,1 +1,1 @@
-angular.module("angularTest", []);
+angular.module("angularTest", ['ngMaterial']);
