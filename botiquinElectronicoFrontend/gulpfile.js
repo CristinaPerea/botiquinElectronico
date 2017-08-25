@@ -97,7 +97,7 @@ gulp.task('copiaFuentesMaterial', function() {
 gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial'], function() {
     console.log('Generating Sass');
     var target = gulp.src('./platforms/browser/index.html');
-    var appCSS = ['./www/css/*.css'];
+    var appCSS = ['./www/css/*.css', './www/js/**/*.css'];
     var injectCSS = injectOrderLibreriasCSS.concat(appCSS);
     var sources = gulp.src(injectCSS, {read: false});
     return target.pipe(inject(sources))
@@ -107,7 +107,7 @@ gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial'], functio
 gulp.task('indexSASSSinLibrerias', function() {
     console.log('Generating Sass');
     var target = gulp.src('./platforms/browser/index.html');
-    var appCSS = ['./www/**/*.css'];
+    var appCSS = ['./www/**/*.css', './www/js/**/*.css'];
     var injectCSS = injectOrderLibreriasCSS.concat(appCSS);
     var sources = gulp.src(injectCSS, {read: false});
     return target.pipe(inject(sources))
@@ -120,7 +120,11 @@ gulp.task('watch', function() {
     gulp.watch(resources, ['indexJSSinLibrerias', 'indexSASSSinLibrerias', 'update']);
 });
 
-gulp.task('server', ['clean', 'updateIndex', 'indexJS', 'indexSASS'], function() {
+gulp.task('copiarImagenes', function () {
+   return gulp.src('./www/img/**/*')
+       .pipe(gulp.dest('./platforms/browser/www/img/'))
+});
+gulp.task('server', ['clean', 'copiarImagenes', 'updateIndex', 'indexJS', 'indexSASS'], function() {
     var port = 8080;
     var url = "http://localhost:" + port + "/";
     http.createServer(ecstatic({

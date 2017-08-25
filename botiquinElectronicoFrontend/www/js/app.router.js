@@ -1,6 +1,6 @@
 angular.module('app').config(function($stateProvider, $mdThemingProvider) {
     $mdThemingProvider.theme('default')
-        .primaryPalette('pink')
+        .primaryPalette('blue')
         .accentPalette('orange');
 
     var home = {
@@ -12,7 +12,6 @@ angular.module('app').config(function($stateProvider, $mdThemingProvider) {
         url: '/dos',
         component: 'testComponentDos'
     };
-
     $stateProvider.state('home', home);
     $stateProvider.state('dos', dos);
 });

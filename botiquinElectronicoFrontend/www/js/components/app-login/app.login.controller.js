@@ -8,6 +8,11 @@ angular.module("app").controller("LoginController", ['$scope', '$http', 'ApiServ
         }
     };
 
+    $scope.muestraFormulario = false;
+
+    $scope.muestraLogin = function() {
+        $scope.muestraFormulario = !$scope.muestraFormulario;
+    };
     $scope.user = {};
 
     $scope.login = function() {

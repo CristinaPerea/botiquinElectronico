@@ -1,19 +1,26 @@
-<md-input-container class="md-icon-float md-block">
-    <!-- Username -->
-    <md-icon>
-        <i class="material-icons">person</i>
-    </md-icon>
-    <input ng-model="user.name" type="text" placeholder="Nombre de usuario">
-</md-input-container>
-<md-input-container class="md-icon-float md-block">
-    <!-- Password -->
-    <md-icon>
-        <i class="material-icons">security</i>
-    </md-icon>
-    <input ng-model="user.password" type="password" placeholder="Password">
-</md-input-container>
-<md-button class="md-raised md-primary" data-ng-click="login()">Entrar</md-button>
-
+<div layout="row" layout-align="center center" flex-offset="20" flex="60" data-ng-click="muestraLogin()">
+    <img src="./www/img/pill_icon-icons.com_53621.png" alt="pharma_logo">
+</div>
+<br>
+<div ng-if="muestraFormulario" class="animate-if">
+    <md-input-container class="md-icon-float md-block">
+        <!-- Username -->
+        <md-icon>
+            <i class="material-icons">person</i>
+        </md-icon>
+        <input ng-model="user.name" type="text" placeholder="Nombre de usuario">
+    </md-input-container>
+    <md-input-container class="md-icon-float md-block">
+        <!-- Password -->
+        <md-icon>
+            <i class="material-icons">security</i>
+        </md-icon>
+        <input ng-model="user.password" type="password" placeholder="Password">
+    </md-input-container>
+    <div layout="row" layout-align="center center">
+        <md-button class="md-raised md-primary" data-ng-click="login()">Entrar</md-button>
+    </div>
+</div>
 <!--<p>Token de sesión: </p>-->
 <!--<p>{{ token }}</p>-->
 <!--{{ resultado | json }}-->
