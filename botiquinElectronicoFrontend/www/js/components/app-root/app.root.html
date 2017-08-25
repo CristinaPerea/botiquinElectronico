@@ -37,9 +37,17 @@
                 <login-component></login-component>
             </div>
         </div>
-        <md-content flex layout-padding data-ng-if="tengoToken">
-            <ui-view></ui-view>
-        </md-content>
+
+            <md-content flex data-ng-if="tengoToken">
+                <md-toolbar layout-align="center" md-scroll-shrink ng-if="true">
+                    <md-button class="md-icon-button" aria-label="Settings" data-ng-click="toggleLeft()">
+                        <md-icon>
+                            <i class="material-icons">menu</i>
+                        </md-icon>
+                    </md-button>
+                </md-toolbar>
+                <ui-view></ui-view>
+            </md-content>
 
     </section>
 </div>
