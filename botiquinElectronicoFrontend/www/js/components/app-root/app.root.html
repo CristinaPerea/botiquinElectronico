@@ -1,4 +1,4 @@
-<div ng-controller="AppCtrl" layout="column" style="height: 500px;" ng-cloak>
+<div ng-controller="AppCtrl" layout="row" ng-cloak>
 
     <section layout="row" flex>
 
@@ -32,8 +32,10 @@
             </md-content>
 
         </md-sidenav>
-        <div data-ng-if="!tengoToken">
-            <login-component></login-component>
+        <div data-ng-if="!tengoToken" layout="row" layout-align="center center" flex="100">
+            <div flex="66">
+                <login-component></login-component>
+            </div>
         </div>
         <md-content flex layout-padding data-ng-if="tengoToken">
             <ui-view></ui-view>

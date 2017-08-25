@@ -2,6 +2,7 @@ angular
     .module('app')
     .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, ApiService, $state) {
         $scope.toggleLeft = buildToggler('left');
+
         $scope.toggleRight = buildToggler('right');
         $scope.tengoToken = false;
 
