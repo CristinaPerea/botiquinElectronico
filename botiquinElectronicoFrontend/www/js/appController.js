@@ -15,7 +15,7 @@ angular
             if(data) {
                 $scope.actualizarEstadoToken(data);
                 ApiService.getUserByUsername(Sesion.username).then(function(success) {
-                    $scope.profile = success.data[0];
+                    $scope.profile = success.data;
                 });
                 $state.go('home');
             }

@@ -39,6 +39,7 @@ class ClienteSerializerConPassword(serializers.Serializer):
         instance.set_password(validated_data.get('password'))
         instance.edad = validated_data.get('edad')
         instance.direccion = validated_data.get('direccion')
+        instance.foto = validated_data.get('foto')
         # Se guarda en la base de datos
         instance.save()
         return instance
@@ -94,6 +95,7 @@ class ClienteSerializer(serializers.Serializer):
         instance.email = validated_data.get('email')
         instance.edad = validated_data.get('edad')
         instance.direccion = validated_data('direccion')
+        instance.foto = validated_data.get('foto')
         #instance.set_password(validated_data.get('password'))
         # Se guarda en la base de datos
         instance.save()

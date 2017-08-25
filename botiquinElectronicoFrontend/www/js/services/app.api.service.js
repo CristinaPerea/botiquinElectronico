@@ -53,7 +53,9 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
     };
 
     this.getUserByUsername = function(username) {
-        return $http(creaPeticion('GET', urls.rutaApiBuscarUsername, null, username));
+        var peticion = creaPeticion('GET', urls.rutaApiBuscarUsername, null, username);
+        peticion.url = peticion.url.slice(0,-1);
+        return $http(peticion);
     };
 
     function creaPeticion(metodo, ruta, datos, argumentoUrl) {

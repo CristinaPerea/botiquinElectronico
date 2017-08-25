@@ -9,27 +9,33 @@
                 <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
             </md-toolbar>
 
-            <md-content layout-margin>
-                <p>
-                    Bienvenido {{ profile.first_name + profile.last_name }}
-                </p>
-                <img ng-src="{{ profile.foto }}" style="height:50px; width: 50px;">
-                <md-button ng-click="toggleLeft()" class="md-accent">
-                    Close this Sidenav
-                </md-button>
-                <a ui-sref="home">
-                    <md-button class="md-accent">
-                        Navega al home
-                    </md-button>
-                </a>
-                <a ui-sref="dos">
-                    <md-button class="md-accent">
-                        Navega al dos
-                    </md-button>
-                </a>
-                <md-button data-ng-click="logout()" class="md-accent">
-                    Logout
-                </md-button>
+            <md-content layout-margin layout="column">
+                <div layout="row">
+                    <div>
+                        <p>Bienvenido {{ profile.first_name + profile.last_name }}</p>
+                    </div>
+                    <div>
+                        <img ng-src="{{ profile.foto }}" style="height:50px; width: 50px;">
+                    </div>
+                </div>
+                <div layout="column">
+                    <div>
+                        <md-button ng-click="toggleLeft()" class="md-accent">Close this Sidenav</md-button>
+                    </div>
+                    <div>
+                        <a ui-sref="home">
+                            <md-button class="md-accent">Navega al home</md-button>
+                        </a>
+                    </div>
+                    <div>
+                        <a ui-sref="dos">
+                            <md-button class="md-accent">Navega al dos</md-button>
+                        </a>
+                    </div>
+                    <div>
+                        <md-button data-ng-click="logout()" class="md-accent">Salir de la aplicación</md-button>
+                    </div>
+                </div>
             </md-content>
 
         </md-sidenav>

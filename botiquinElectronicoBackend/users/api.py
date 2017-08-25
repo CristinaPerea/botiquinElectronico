@@ -13,6 +13,7 @@ class ClienteViewSet(GenericViewSet):
     serializer_class = ClienteSerializer
     filter_backends = (SearchFilter, )
     search_fields = ('username', )
+
     def get_queryset(self):
         if self.request.method == 'GET':
             return Cliente.objects.all()
@@ -27,8 +28,12 @@ class ClienteViewSet(GenericViewSet):
     def list(self, request):
         self.check_permissions(request)
         # self.paginate_queryset(self.get_queryset())
-        querySet = self.get_queryset()
-        serializer = self.get_serializer(querySet, many=True)
+        if request.query_params.get('search'):
+            querySet = Cliente.objects.filter(username=request.query_params.get('search'))
+            serializer = self.get_serializer(querySet[0], many=False)
+        else:
+            querySet = self.get_queryset()
+            serializer = self.get_serializer(querySet, many=True)
         return Response(serializer.data)
 
     def create(self, request):
