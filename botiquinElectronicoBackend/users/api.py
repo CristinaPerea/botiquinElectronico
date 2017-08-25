@@ -1,4 +1,5 @@
 from rest_framework import status
+from rest_framework.filters import SearchFilter
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.response import Response
 from users.models import Cliente
@@ -10,7 +11,8 @@ class ClienteViewSet(GenericViewSet):
     permission_classes = [ClientePermission]
     # pagination_class = PageNumberPagination
     serializer_class = ClienteSerializer
-
+    filter_backends = (SearchFilter, )
+    search_fields = ('username', )
     def get_queryset(self):
         if self.request.method == 'GET':
             return Cliente.objects.all()

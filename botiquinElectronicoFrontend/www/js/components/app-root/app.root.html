@@ -11,8 +11,9 @@
 
             <md-content layout-margin>
                 <p>
-                    This sidenav is not showing any backdrop, where users can click on it, to close the sidenav.
+                    Bienvenido {{ profile.first_name + profile.last_name }}
                 </p>
+                <img ng-src="{{ profile.foto }}" style="height:50px; width: 50px;">
                 <md-button ng-click="toggleLeft()" class="md-accent">
                     Close this Sidenav
                 </md-button>

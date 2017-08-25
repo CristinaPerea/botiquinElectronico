@@ -1,8 +1,7 @@
 angular
     .module('app')
-    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, ApiService, $state) {
+    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, ApiService, $state, Sesion) {
         $scope.toggleLeft = buildToggler('left');
-
         $scope.toggleRight = buildToggler('right');
         $scope.tengoToken = false;
 
@@ -15,6 +14,9 @@ angular
         $scope.$on('token', function(event, data) {
             if(data) {
                 $scope.actualizarEstadoToken(data);
+                ApiService.getUserByUsername(Sesion.username).then(function(success) {
+                    $scope.profile = success.data[0];
+                });
                 $state.go('home');
             }
         });

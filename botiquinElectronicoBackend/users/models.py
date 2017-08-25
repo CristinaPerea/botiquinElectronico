@@ -5,3 +5,4 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class Cliente(User):
     edad = models.IntegerField(validators=[MaxValueValidator(110), MinValueValidator(0)])
     direccion = models.CharField(max_length=50)
+    foto = models.URLField(blank=None, null=None)

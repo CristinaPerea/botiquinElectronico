@@ -27,3 +27,4 @@ botiquinElectronicoBackend/productos/migrations/__pycache__/0006_auto_20170823_0
 botiquinElectronicoBackend/productos/migrations/__pycache__/0005_auto_20170823_0038.cpython-35.pyc
 botiquinElectronicoBackend/pedidos/migrations/__pycache__/0003_auto_20170823_0109.cpython-35.pyc
 botiquinElectronicoBackend/pedidos/migrations/__pycache__/0002_auto_20170822_2354.cpython-35.pyc
+botiquinElectronicoBackend/users/migrations/__pycache__/0003_cliente_foto.cpython-35.pyc

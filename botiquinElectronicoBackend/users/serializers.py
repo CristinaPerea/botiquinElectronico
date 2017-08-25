@@ -11,6 +11,7 @@ class ClienteSerializerConPassword(serializers.Serializer):
     password = serializers.CharField()
     edad = serializers.IntegerField()
     direccion = serializers.CharField()
+    foto = serializers.URLField()
 
     def create(self, validated_data):
         '''
@@ -66,6 +67,7 @@ class ClienteSerializer(serializers.Serializer):
     password = serializers.ReadOnlyField()
     edad = serializers.IntegerField()
     direccion = serializers.CharField()
+    foto = serializers.URLField()
 
     def create(self, validated_data):
         '''
