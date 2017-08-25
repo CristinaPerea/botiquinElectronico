@@ -8,10 +8,22 @@ angular.module('app').config(function($stateProvider, $mdThemingProvider) {
         component: 'testComponent'
     };
 
-    var dos = {
-        url: '/dos',
-        component: 'testComponentDos'
+    var detalle = {
+        url: '/detalle/:id',
+        component: 'detalleProducto',
+        resolve: {
+           idProducto: function($stateParams) {
+               return $stateParams.id;
+           }
+        }
     };
+
+    var buscador = {
+        url: '/buscador',
+        component: 'buscadorProducto'
+    };
+
     $stateProvider.state('home', home);
-    $stateProvider.state('dos', dos);
+    $stateProvider.state('detalle', detalle);
+    $stateProvider.state('buscador', buscador);
 });

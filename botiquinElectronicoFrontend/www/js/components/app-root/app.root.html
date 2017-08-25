@@ -1,7 +1,6 @@
 <div ng-controller="AppCtrl" layout="row" ng-cloak style="height: 100%">
 
     <section layout="row" flex>
-
         <md-sidenav class="md-sidenav-left" md-component-id="left"
                     md-whiteframe="4">
 
@@ -9,13 +8,13 @@
                 <h1 class="md-toolbar-tools">Disabled Backdrop</h1>
             </md-toolbar>
 
-            <md-content layout-margin layout="column">
-                <div layout="row">
+            <md-content layout="column">
+                <div layout="column" style="background-image: url('/www/img/halftone-azul.jpg'); padding: 4%;">
                     <div>
-                        <p>Bienvenido {{ profile.first_name + profile.last_name }}</p>
+                        <img ng-src="{{ profile.foto }}" style="height:50px; width: 50px; border-radius: 100%;">
                     </div>
                     <div>
-                        <img ng-src="{{ profile.foto }}" style="height:50px; width: 50px;">
+                        <p>Bienvenido {{ profile.first_name}}  {{profile.last_name }}</p>
                     </div>
                 </div>
                 <div layout="column">
@@ -28,8 +27,13 @@
                         </a>
                     </div>
                     <div>
-                        <a ui-sref="dos">
+                        <a ui-sref="detalle">
                             <md-button class="md-accent">Navega al dos</md-button>
+                        </a>
+                    </div>
+                    <div>
+                        <a ui-sref="buscador">
+                            <md-button class="md-accent">Buscar prodcuto</md-button>
                         </a>
                     </div>
                     <div>
@@ -44,17 +48,15 @@
                 <login-component></login-component>
             </div>
         </div>
-
-            <md-content flex data-ng-if="tengoToken">
-                <md-toolbar layout-align="center" md-scroll-shrink ng-if="true">
-                    <md-button class="md-icon-button" aria-label="Settings" data-ng-click="toggleLeft()">
-                        <md-icon>
-                            <i class="material-icons">menu</i>
-                        </md-icon>
-                    </md-button>
-                </md-toolbar>
-                <ui-view></ui-view>
-            </md-content>
-
+        <md-content flex data-ng-if="tengoToken">
+            <md-toolbar layout-align="center" md-scroll-shrink ng-if="true">
+                <md-button class="md-icon-button" aria-label="Settings" data-ng-click="toggleLeft()">
+                    <md-icon>
+                        <i class="material-icons">menu</i>
+                    </md-icon>
+                </md-button>
+            </md-toolbar>
+            <ui-view></ui-view>
+        </md-content>
     </section>
 </div>

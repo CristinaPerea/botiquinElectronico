@@ -1,0 +1,18 @@
+<div layout-margin="10px;" layout=row>
+    <md-input-container class="md-icon-float md-block" flex="90" style="padding-top: 14px;">
+        <input ng-model="termino" type="text" placeholder="Introduzca término:">
+    </md-input-container>
+    <md-input-container class="md-icon-float md-block">
+        <md-button class="md-raised md-primary" data-ng-click="buscaProducto()" ng-disabled="termino.length <= 4">
+            <md-icon>
+                <i class="material-icons">search</i>
+            </md-icon>
+        </md-button>
+    </md-input-container>
+</div>
+<div data-ng-if="buscando" layout="row" layout-align="center center">
+    <md-progress-circular ng-disabled="buscando" class="md-hue-2" md-diameter="50px"></md-progress-circular>
+</div>
+<div data-ng-if="resultados">
+    {{resultados | json}}
+</div>

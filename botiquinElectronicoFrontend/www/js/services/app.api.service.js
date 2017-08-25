@@ -58,6 +58,15 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
         return $http(peticion);
     };
 
+    this.getProducto = function (id) {
+        return $http(creaPeticion('GET', urls.rutaApiProducto, null, id));
+    };
+    this.getProspecto = function (termino) {
+        var datos = {
+            termino : termino
+        };
+        return $http(creaPeticion('POST', urls.rutaApiBuscaProspecto, datos, null));
+    };
     function creaPeticion(metodo, ruta, datos, argumentoUrl) {
         var peticion = {};
         token = "Token " + Sesion.token;
