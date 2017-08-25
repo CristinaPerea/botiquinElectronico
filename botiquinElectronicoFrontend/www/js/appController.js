@@ -14,6 +14,7 @@ angular
         $scope.$on('token', function(event, data) {
             if(data) {
                 $scope.actualizarEstadoToken(data);
+                $state.go('home');
             }
         });
 
