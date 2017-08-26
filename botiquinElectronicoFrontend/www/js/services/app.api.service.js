@@ -67,6 +67,13 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
         };
         return $http(creaPeticion('POST', urls.rutaApiBuscaProspecto, datos, null));
     };
+    
+    this.getPedidosSin = function (idCliente) {
+        var peticion = creaPeticion('GET', urls.rutaApiPedidosSinReceta, null, idCliente);
+        peticion.url = peticion.url.slice(0,-1);
+        return $http(peticion);
+    };
+
     function creaPeticion(metodo, ruta, datos, argumentoUrl) {
         var peticion = {};
         token = "Token " + Sesion.token;

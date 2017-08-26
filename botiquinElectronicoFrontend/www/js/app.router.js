@@ -5,7 +5,7 @@ angular.module('app').config(function($stateProvider, $mdThemingProvider) {
 
     var home = {
         url: '/home',
-        component: 'testComponent'
+        component: 'homeComponent'
     };
 
     var detalle = {

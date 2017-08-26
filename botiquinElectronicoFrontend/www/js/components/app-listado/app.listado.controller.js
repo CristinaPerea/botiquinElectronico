@@ -4,15 +4,7 @@ angular.module("app").controller("ListadoProductosController", ['$scope', 'ApiSe
 
     this.$onInit = function() {
         $scope.resultados = this.resultados;
-        console.log($scope.resultados);
     };
-    //
-    // $scope.abrirDetalle = function(id) {
-    //     ApiService.getProducto(id).then(function (success) {
-    //         $scope.producto = success.data;
-    //         console.log(success.data);
-    //     });
-    // }
 
     $scope.closeDialog = function() {
         $mdDialog.hide();

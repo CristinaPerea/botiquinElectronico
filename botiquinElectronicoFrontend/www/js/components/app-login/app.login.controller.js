@@ -32,6 +32,7 @@ angular.module("app").controller("LoginController", ['$scope', '$http', 'ApiServ
 
             $http(peticion).then(function (success) {
                 $scope.resultado = success.data;
+                console.log($scope.resultado);
             });
             $scope.$emit('token', true);
         });

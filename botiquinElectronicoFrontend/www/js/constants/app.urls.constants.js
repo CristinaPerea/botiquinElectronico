@@ -5,5 +5,6 @@ angular.module("app").constant("urls", {
     "rutaApiLogout" : "api/v1/logout/",
     "rutaApiBuscarUsername" : "api/v1/users/?search=",
     "rutaApiProducto" : "api/v1/productos/",
-    "rutaApiBuscaProspecto" : "api/v1/busca_prospecto/"
+    "rutaApiBuscaProspecto" : "api/v1/busca_prospecto/",
+    "rutaApiPedidosSinReceta" : "api/v1/pedidos_sin_receta/?cliente__id="
 });

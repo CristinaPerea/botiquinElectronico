@@ -2,7 +2,6 @@
 
 angular.module("app").controller("DetalleProductoController", ['$scope', '$mdSidenav', 'ApiService', '$sce', function($scope, $mdSidenav, ApiService, $sce) {
     this.$onInit = function() {
-        console.log('Llego a detalle de producto');
         ApiService.getProducto(this.id).then(function (success) {
             $scope.producto = success.data;
             var descripcion_html = $sce.trustAsHtml(success.data.descripcion_html);
