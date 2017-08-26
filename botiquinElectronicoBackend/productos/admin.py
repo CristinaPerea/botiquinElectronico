@@ -3,6 +3,8 @@ from productos.models import Producto, ProductoEnStock, Pendiente
 
 class ProductoEnStockAdmin(admin.ModelAdmin):
     model = ProductoEnStock
+    search_fields = ('id_producto__nombre_producto', )
+    list_filter = ('id_producto__con_receta',)
     raw_id_fields = ('id_pedido_con_receta', 'id_producto',)
     icon = '<i class="material-icons">assignment_turned_in</i>'
 

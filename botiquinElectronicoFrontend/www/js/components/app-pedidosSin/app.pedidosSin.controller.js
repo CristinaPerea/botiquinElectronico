@@ -16,7 +16,6 @@ angular.module("app").controller("PedidosSinController", ['$http', '$scope', 'Ap
         for(var pedido in $scope.pedidosSin) {
             if($scope.pedidosSin[pedido].id === id) {
                 $scope.productosDePedido = $scope.pedidosSin[pedido].productos_en_stock;
-                console.log($scope.productosDePedido);
                 for(var producto in $scope.productosDePedido){
                     $scope.idProductosDePedidoSeleccionado.push($scope.productosDePedido[producto].id_producto);
                 }

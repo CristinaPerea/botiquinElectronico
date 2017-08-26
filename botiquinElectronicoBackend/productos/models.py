@@ -28,10 +28,16 @@ class ProductoEnStock(models.Model):
         self.fecha_expiracion = self.fecha_pedido + d
         super(ProductoEnStock, self).save()
 
+    def __str__(self):
+        return self.id_producto
+
 class Pendiente(models.Model):
     id_producto = models.ForeignKey(Producto)
     id_pedido_con_receta = models.ForeignKey(PedidosConReceta, blank=True, null=True)
     id_pedido_sin_receta = models.ForeignKey(PedidosSinReceta, blank=True, null=True)
     fecha_pedido = models.DateField()
     fecha_expiracion = models.DateField()
+
+    def __str__(self):
+        return self.id_producto
     
