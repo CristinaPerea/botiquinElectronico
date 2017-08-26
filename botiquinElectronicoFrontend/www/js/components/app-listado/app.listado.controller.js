@@ -11,7 +11,6 @@ angular.module("app").controller("ListadoProductosController", ['$scope', 'ApiSe
     };
 
     $scope.abrirDetalle = function(ev, id) {
-        console.log(id);
         $scope.id = id;
         $mdDialog.show(
             $mdDialog.alert({

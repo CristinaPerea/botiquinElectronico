@@ -1,21 +1,16 @@
 'use strict';
 
-angular.module("app").controller("PedidosSinController", ['$http', '$scope', 'ApiService', 'Sesion', '$mdDialog', function($http, $scope, ApiService, Sesion, $mdDialog) {
+angular.module("app").controller("ListadoPedidosController", ['$http', '$scope', 'ApiService', 'Sesion', '$mdDialog', function($http, $scope, ApiService, Sesion, $mdDialog) {
     this.$onInit = function() {
-        ApiService.getUserByUsername(Sesion.username).then(function (success) {
-           $scope.idUsuario = success.data.id;
-            ApiService.getPedidosSin($scope.idUsuario).then(function (success) {
-                $scope.pedidosSin = success.data.results;
-            });
-        });
+        $scope.pedidos = this.pedidos;
     };
 
     $scope.verProductos = function(id) {
         $scope.idSeleccionado = id;
         $scope.idProductosDePedidoSeleccionado = [];
-        for(var pedido in $scope.pedidosSin) {
-            if($scope.pedidosSin[pedido].id === id) {
-                $scope.productosDePedido = $scope.pedidosSin[pedido].productos_en_stock;
+        for(var pedido in $scope.pedidos) {
+            if($scope.pedidos[pedido].id === id) {
+                $scope.productosDePedido = $scope.pedidos[pedido].productos_en_stock;
                 console.log($scope.productosDePedido);
                 for(var producto in $scope.productosDePedido){
                     $scope.idProductosDePedidoSeleccionado.push($scope.productosDePedido[producto].id_producto);

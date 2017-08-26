@@ -1,14 +1,14 @@
-<div layout="column">
+<div layout="column" ng-if="fullRender">
     <div ng-cloak>
         <md-tabs md-dynamic-height md-border-bottom>
             <md-tab label="Tus Pedidos">
                 <md-content class="md-padding">
-                    <pedidos-sin></pedidos-sin>
+                    <listado-pedidos data-pedidos="pedidosSin"></listado-pedidos>
                 </md-content>
             </md-tab>
             <md-tab label="Tratamientos">
                 <md-content class="md-padding">
-                    <pedidos-con></pedidos-con>
+                    <listado-pedidos data-pedidos="pedidosCon"></listado-pedidos>
                 </md-content>
             </md-tab>
         </md-tabs>

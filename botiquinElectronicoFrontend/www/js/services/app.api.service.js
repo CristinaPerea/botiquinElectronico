@@ -74,6 +74,12 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
         return $http(peticion);
     };
 
+    this.getPedidosCon = function (idCliente) {
+        var peticion = creaPeticion('GET', urls.rutaApiPedidosConReceta, null, idCliente);
+        peticion.url = peticion.url.slice(0,-1);
+        return $http(peticion);
+    };
+
     function creaPeticion(metodo, ruta, datos, argumentoUrl) {
         var peticion = {};
         token = "Token " + Sesion.token;
