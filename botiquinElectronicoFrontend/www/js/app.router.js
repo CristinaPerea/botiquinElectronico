@@ -12,7 +12,7 @@ angular.module('app').config(function($stateProvider, $mdThemingProvider) {
         url: '/detalle/:id',
         component: 'detalleProducto',
         resolve: {
-           idProducto: function($stateParams) {
+           id: function($stateParams) {
                return $stateParams.id;
            }
         }

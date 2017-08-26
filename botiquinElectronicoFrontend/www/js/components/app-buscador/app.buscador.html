@@ -1,6 +1,6 @@
 <div layout-margin="10px;" layout=row>
     <md-input-container class="md-icon-float md-block" flex="90" style="padding-top: 14px;">
-        <input ng-model="termino" type="text" placeholder="Introduzca término:">
+        <input ng-model="termino" type="text" placeholder="Introduzca término">
     </md-input-container>
     <md-input-container class="md-icon-float md-block">
         <md-button class="md-raised md-primary" data-ng-click="buscaProducto()" ng-disabled="termino.length <= 4">
@@ -14,5 +14,5 @@
     <md-progress-circular ng-disabled="buscando" class="md-hue-2" md-diameter="50px"></md-progress-circular>
 </div>
 <div data-ng-if="resultados">
-    {{resultados | json}}
+    <listado-productos data-resultados="resultados"></listado-productos>
 </div>

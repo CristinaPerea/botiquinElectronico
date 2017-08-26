@@ -1,0 +1,10 @@
+<div>
+    <md-list flex>
+        <md-list-item class="md-3-line" ng-repeat="resultado in resultados track by resultado.id" ng-click="abrirDetalle($event, resultado.id)">
+            <div class="md-list-item-text" layout="column">
+                <h3>{{ resultado.nombre_producto }}</h3>
+                <h4>{{ resultado.descripcion }}</h4>
+            </div>
+        </md-list-item>
+    </md-list>
+</div>
