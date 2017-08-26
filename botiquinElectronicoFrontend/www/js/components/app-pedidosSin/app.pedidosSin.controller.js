@@ -37,4 +37,8 @@ angular.module("app").controller("PedidosSinController", ['$http', '$scope', 'Ap
             });
         }
     };
+
+    $scope.verDetallesProducto = function(id) {
+        console.log('Holaaaaa');
+    };
 }]);
