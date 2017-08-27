@@ -61,6 +61,13 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
     this.getProducto = function (id) {
         return $http(creaPeticion('GET', urls.rutaApiProducto, null, id));
     };
+
+    this.getProductoEnStock = function (idProducto) {
+        var peticion = creaPeticion('GET', urls.rutaApiProductoEnStock, null, idProducto);
+        peticion.url = peticion.url.slice(0,-1);
+        return $http(peticion);
+    };
+
     this.getProspecto = function (termino) {
         var datos = {
             termino : termino

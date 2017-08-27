@@ -14,13 +14,12 @@
     <md-progress-circular ng-disabled="buscando" class="md-hue-2" md-diameter="50px"></md-progress-circular>
 </div>
 <div data-ng-if="resultados">
-    <!--<listado-productos data-resultados="resultados"></listado-productos>-->
     <div>
         <md-list flex>
             <md-list-item class="md-3-line" ng-repeat="resultado in resultados track by resultado.id">
                 <div class="md-list-item-text" layout="row">
                     <h3 flex="90" style="padding-top: 13px;">{{ resultado.nombre_producto }}</h3>
-                    <md-button class="" ng-click="añadeProducto(resultado.id)">
+                    <md-button class="" ng-click="seleccionProducto(resultado.id)">
                         <md-icon>
                             <i class="material-icons">add_circle_outline</i>
                         </md-icon>

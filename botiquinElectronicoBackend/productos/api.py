@@ -1,28 +1,35 @@
 import os
 from django.views import View
 from rest_framework import status
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, DjangoFilterBackend
 from rest_framework.generics import ListAPIView
 from rest_framework.views import APIView
 from rest_framework.viewsets import GenericViewSet, ModelViewSet, ReadOnlyModelViewSet
 from rest_framework.response import Response
+from rest_framework import mixins
 from whoosh.filedb.filestore import FileStorage
 from whoosh.index import open_dir
 from whoosh.qparser import QueryParser
 
-from productos.models import ProductoEnStock, Producto
-from productos.serializers import ProductoEnStockSerializer, ProductoSerializer, ProductoWhooshSerializer
+from productos.models import ProductoEnStock, Producto, Pendiente
+from productos.serializers import ProductoEnStockSerializer, ProductoSerializer, ProductoWhooshSerializer, \
+    PendienteSerializer
 from django.shortcuts import get_object_or_404
-
 
 class ProductosViewSet(ReadOnlyModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
 
+class PendientesViewSet(ModelViewSet):
+    queryset = Pendiente.objects.all()
+    serializer_class = PendienteSerializer
+    http_method_names = ['post', 'get', 'head']
+
 class ProductosEnStockViewSet(GenericViewSet):
 
     search_fields = ('id_pedido_con_receta__id',)
-    filter_backends = (SearchFilter,)
+    filter_fields = ('id_producto',)
+    filter_backends = (SearchFilter, DjangoFilterBackend)
     # serializer_class = PedidosSinRecetaSerializer
 
     def get_queryset(self):
@@ -37,9 +44,12 @@ class ProductosEnStockViewSet(GenericViewSet):
 
     def list(self, request):
         self.check_permissions(request)
-        # self.paginate_queryset(self.get_queryset())
-        querySet = self.get_queryset()
-        serializer = self.get_serializer(querySet, many=True)
+        if request.query_params.get('id_producto'):
+            querySet = ProductoEnStock.objects.filter(id_producto=request.query_params.get('id_producto'))
+            serializer = self.get_serializer(querySet, many=True)
+        else:
+            querySet = self.get_queryset()
+            serializer = self.get_serializer(querySet, many=True)
         return Response(serializer.data)
 
     def retrieve(self, request, pk):

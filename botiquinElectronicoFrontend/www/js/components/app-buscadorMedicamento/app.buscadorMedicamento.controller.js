@@ -6,6 +6,8 @@ angular.module("app").controller("BuscadorMedicamentoController", ['$scope', 'Ap
         $scope.termino = '';
         $scope.resultados = null;
         $scope.buscando = false;
+        $scope.pedido = this.pedido;
+        console.log($scope.pedido);
     };
 
     $scope.buscaMedicamento = function () {
@@ -15,5 +17,22 @@ angular.module("app").controller("BuscadorMedicamentoController", ['$scope', 'Ap
             $scope.resultados = success.data;
             $scope.buscando = false;
         });
-    }
+    };
+
+    $scope.seleccionProducto = function (id) {
+      console.log(id);
+      ApiService.getProductoEnStock(id).then(function (success) {
+         console.log(success.data);
+         if (success.data.length === 0) {
+             console.log("este medicamento no está en stock");
+         } else {
+             for (var producto in success.data) {
+                 if ((success.data[producto].id_pedido_con_receta) === null && (success.data[producto].id_pedido_sin_receta) === null) {
+                     console.log(success.data[producto]);
+                 }
+             }
+         }
+      });
+
+    };
 }]);
