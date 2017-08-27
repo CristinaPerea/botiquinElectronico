@@ -31,6 +31,8 @@ class ProductosEnStockViewSet(GenericViewSet):
             return productos_en_stock
 
     def get_serializer_class(self):
+        # serializer = ProductoEnStockSerializer(partial=True)
+        # return serializer.__class__
         return ProductoEnStockSerializer
 
     def list(self, request):
@@ -48,7 +50,7 @@ class ProductosEnStockViewSet(GenericViewSet):
 
     def update(self, request, pk):
         producto_en_stock = get_object_or_404(ProductoEnStock, pk=pk)
-        serializer = self.get_serializer(instance=producto_en_stock, data=request.data)
+        serializer = self.get_serializer(instance=producto_en_stock, data=request.data, partial=True)
         if serializer.is_valid() and producto_en_stock.id_pedido_sin_receta is None:
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
@@ -97,3 +99,37 @@ class BuscaProspectoAPI(APIView):
         # searcher.close()
         return formatted_results
 
+class BuscaNombreProductoAPI(APIView):
+
+    def post(self, request):
+        lista_ids = []
+        termino = request.data.get('termino')
+        resultados = self.buscarNombre(termino)
+        for resultado in resultados:
+            lista_ids.append(Producto(id=resultado['id'], nombre_producto=resultado['hit']['nombre_producto'], descripcion=resultado['texto_corto']))
+        serializador = ProductoWhooshSerializer(lista_ids, many=True)
+        productos_serializados = serializador.data
+        return Response(productos_serializados)
+
+    def buscarNombre(self, busqueda):
+        storage = FileStorage(os.getcwd() + "/scrapper/index")
+        ix = storage.open_index()
+        searcher = ix.searcher()
+        parser = QueryParser("nombre_producto", ix.schema)
+        myquery = parser.parse(busqueda)
+        results = searcher.search(myquery, limit=None)
+        results.fragmenter.surround = 150
+
+        formatted_results = []
+        for hit in results:
+            dict = {}
+            dict['id'] = hit['id']
+            try:
+                valor = hit.highlights('nombre_producto', top=1)
+            except UnicodeDecodeError:
+                valor = 'Varias apariciones de <b class="match term0">' + busqueda + '</b>'
+            dict['texto_corto'] = valor
+            dict['hit'] = hit
+            formatted_results.append(dict)
+        # searcher.close()
+        return formatted_results

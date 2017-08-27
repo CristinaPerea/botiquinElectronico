@@ -2,11 +2,8 @@ from rest_framework import serializers
 from pedidos.models import PedidosSinReceta, PedidosConReceta
 from productos.serializers import ProductoEnStockSerializer
 
-from users.models import Cliente
-
-
 class PedidosSinRecetaSerializer(serializers.ModelSerializer):
-    productos_en_stock = ProductoEnStockSerializer(many=True)
+    productos_en_stock = ProductoEnStockSerializer(many=True, read_only=True)
     class Meta():
         model = PedidosSinReceta
         exclude = []

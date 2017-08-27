@@ -10,4 +10,14 @@ def buscar(busqueda):
     results = searcher.search(myquery, limit=50)
     print(results)
     print('Resultado: ' + str(len(results)))
-buscar('pulmonar')
+
+def buscarNombre(busqueda):
+    ix = open_dir("index")
+    searcher = ix.searcher()
+    parser = QueryParser("nombre_producto", ix.schema)
+    myquery = parser.parse(busqueda)
+    resultados = searcher.search(myquery, limit=None)
+    print(resultados)
+
+# buscar('pulmonar')
+buscarNombre('ibuprofeno')

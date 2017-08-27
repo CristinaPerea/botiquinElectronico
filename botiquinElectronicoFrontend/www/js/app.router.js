@@ -18,6 +18,17 @@ angular.module('app').config(function($stateProvider, $mdThemingProvider) {
         }
     };
 
+    var crearPedido = {
+        url: '/crearPedido',
+        component: 'nuevoPedido',
+        resolve: {
+            pedido: function (ApiService, Sesion) {
+                return ApiService.crearPedido(Sesion.username).then(function (success) {
+                    return success.data;
+                })
+            }
+        }
+    };
     var buscador = {
         url: '/buscador',
         component: 'buscadorProducto'
@@ -26,4 +37,5 @@ angular.module('app').config(function($stateProvider, $mdThemingProvider) {
     $stateProvider.state('home', home);
     $stateProvider.state('detalle', detalle);
     $stateProvider.state('buscador', buscador);
+    $stateProvider.state('crearPedido', crearPedido);
 });

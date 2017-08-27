@@ -17,7 +17,7 @@ from django.conf.urls import url, include
 from django.contrib import admin
 from rest_framework.authtoken import views
 
-from productos.api import BuscaProspectoAPI
+from productos.api import BuscaProspectoAPI, BuscaNombreProductoAPI
 from users.views import LogoutAPI
 
 urlpatterns = [
@@ -29,5 +29,6 @@ urlpatterns = [
     # API Rest login
     url(r'^api/v1/login', views.obtain_auth_token, name="users_api_login"),
     url(r'^api/v1/logout', LogoutAPI.as_view(), name="users_api_logout"),
-    url(r'^api/v1/busca_prospecto', BuscaProspectoAPI.as_view(), name='busca_prospecto')
+    url(r'^api/v1/busca_prospecto', BuscaProspectoAPI.as_view(), name='busca_prospecto'),
+    url(r'^api/v1/busca_producto', BuscaNombreProductoAPI.as_view(), name='busca_producto')
 ]

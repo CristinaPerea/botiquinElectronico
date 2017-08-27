@@ -67,6 +67,13 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
         };
         return $http(creaPeticion('POST', urls.rutaApiBuscaProspecto, datos, null));
     };
+
+    this.getMedicamento = function (termino) {
+        var datos = {
+            termino : termino
+        };
+        return $http(creaPeticion('POST', urls.rutaApiBuscaMedicamento, datos, null));
+    };
     
     this.getPedidosSin = function (idCliente) {
         var peticion = creaPeticion('GET', urls.rutaApiPedidosSinReceta, null, idCliente);
@@ -80,6 +87,15 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
         return $http(peticion);
     };
 
+    this.crearPedido = function (username) {
+        return this.getUserByUsername(username).then(function (success) {
+            var id = success.data.id;
+            var datos = {
+                cliente : id
+            };
+            return $http(creaPeticion('POST', urls.rutaCrearPedido, datos, null));
+        });
+    };
     function creaPeticion(metodo, ruta, datos, argumentoUrl) {
         var peticion = {};
         token = "Token " + Sesion.token;
