@@ -100,9 +100,45 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
             var datos = {
                 cliente : id
             };
-            return $http(creaPeticion('POST', urls.rutaCrearPedido, datos, null));
+            return $http(creaPeticion('POST', urls.rutaApiCrearPedido, datos, null));
         });
     };
+
+    this.getProductosDePedidosSinRecetaEnPendiente = function(idPedido) {
+        var peticion = creaPeticion('GET', urls.rutaApiPendientesPorIdDePedidoSinReceta, null, idPedido);
+        peticion.url = peticion.url.slice(0,-1);
+        return $http(peticion);
+    };
+
+    this.meteProductoAPedido = function (idPedidoSin, idProductoEnStock) {
+        var datos = {
+            "id_pedido_sin_receta": idPedidoSin
+        };
+        var peticion = creaPeticion('PUT', urls.rutaApiProdcutoEnStockId, datos, idProductoEnStock);
+        return $http(peticion);
+    };
+
+    this.borraProductoEnStock = function(idProductoEnStock) {
+        return $http(creaPeticion('DELETE', urls.rutaApiProdcutoEnStockId, null, idProductoEnStock));
+    };
+
+    this.borraProductoEnPendientes = function(idProductoEnPendientes) {
+        return $http(creaPeticion('DELETE', urls.rutaApiCrearPendiente, null, idProductoEnPendientes));
+    };
+
+
+
+    this.creaPendiente = function (fechaPedido, idProducto, idPedidoSin) {
+      var datos = {
+          "fecha_pedido": fechaPedido,
+          "id_producto": idProducto,
+          "id_pedido_con_receta": null,
+          "id_pedido_sin_receta": idPedidoSin
+      };
+      var peticion = creaPeticion('POST', urls.rutaApiCrearPendiente, datos, null);
+      return $http(peticion);
+    };
+
     function creaPeticion(metodo, ruta, datos, argumentoUrl) {
         var peticion = {};
         token = "Token " + Sesion.token;

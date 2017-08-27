@@ -1,3 +1,13 @@
+<div ng-repeat="producto in carrito" layout="column" layout-align="center">
+    <div ng-click="borraDeStock(producto.idEnStock)" ng-if="producto.estaEnStock" style="border: 2px solid lightgreen; margin-bottom: 5px;" flex="100" layout="row" layout-margin="5px">
+        <img src="{{producto.foto_producto}}" style="height:50px; width: 50px;">
+        <h4 style="margin-left: 10px; padding-top: 18px;" flex="80"> {{producto.nombre_producto}}</h4>
+    </div>
+    <div ng-click="borraDePendientes(producto.idEnStock)" ng-if="!producto.estaEnStock" style="border: 2px solid lightcoral; margin-bottom: 5px;" flex="100" layout="row" layout-margin="5px">
+        <img src="{{producto.foto_producto}}" style="height:50px; width: 50px;">
+        <h4 style="margin-left: 10px; padding-top: 18px;" flex="80"> {{producto.nombre_producto}}</h4>
+    </div>
+</div>
 <div layout-margin="10px;" layout=row>
     <md-input-container class="md-icon-float md-block" flex="90" style="padding-top: 14px;">
         <input ng-model="termino" type="text" placeholder="Introduzca nombre del fármaco">

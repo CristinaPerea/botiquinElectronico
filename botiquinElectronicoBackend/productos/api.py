@@ -23,7 +23,18 @@ class ProductosViewSet(ReadOnlyModelViewSet):
 class PendientesViewSet(ModelViewSet):
     queryset = Pendiente.objects.all()
     serializer_class = PendienteSerializer
-    http_method_names = ['post', 'get', 'head']
+    http_method_names = ['post', 'get', 'head', 'delete']
+    filter_backends = (DjangoFilterBackend,)
+    filter_fields = ('id_pedido_sin_receta', )
+
+    def list(self, request):
+        if request.query_params.get('id_pedido_sin_receta'):
+            querySet = Pendiente.objects.filter(id_pedido_sin_receta=request.query_params.get('id_pedido_sin_receta'))
+            serializer = self.get_serializer(querySet, many=True)
+        else:
+            querySet = self.get_queryset()
+            serializer = self.get_serializer(querySet, many=True)
+        return Response(serializer.data)
 
 class ProductosEnStockViewSet(GenericViewSet):
 
@@ -66,6 +77,12 @@ class ProductosEnStockViewSet(GenericViewSet):
             return Response(serializer.data, status=status.HTTP_200_OK)
         else:
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def destroy(self, request, pk):
+        producto = get_object_or_404(ProductoEnStock, pk=pk)
+        producto.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 
 
 class BuscaProspectoAPI(APIView):

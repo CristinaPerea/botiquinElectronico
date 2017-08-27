@@ -29,6 +29,20 @@ angular.module("app").controller("ListadoPedidosController", ['$http', '$scope',
                 $scope.productosDePedidoSeleccionado.push(producto);
             });
         }
+        $scope.productosDePedidoSeleccionadoEnPendientes = [];
+        ApiService.getProductosDePedidosSinRecetaEnPendiente(id).then(function (success) {
+            for(var i = 0; i < success.data.length; i++) {
+                var idProducto = success.data[i].id_producto;
+                ApiService.getProducto(idProducto).then(function(success) {
+                    var producto = {
+                        id: success.data.id,
+                        nombre: success.data.nombre_producto
+                    };
+
+                    $scope.productosDePedidoSeleccionadoEnPendientes.push(producto);
+                });
+            }
+        });
     };
 
     $scope.closeDialog = function() {
