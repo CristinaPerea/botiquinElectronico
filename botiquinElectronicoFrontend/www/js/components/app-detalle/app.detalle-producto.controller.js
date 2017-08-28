@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module("app").controller("DetalleProductoController", ['$scope', '$mdSidenav', 'ApiService', '$sce', function($scope, $mdSidenav, ApiService, $sce) {
+
+    // Función onInit del componente que hace una llamada a la API para devolver los prospectos del producto.
     this.$onInit = function() {
         ApiService.getProducto(this.id).then(function (success) {
             $scope.producto = success.data;
@@ -9,10 +11,10 @@ angular.module("app").controller("DetalleProductoController", ['$scope', '$mdSid
         });
     };
 
-    function buildToggler(componentId) {
-        return function() {
-            $mdSidenav(componentId).toggle();
-        };
-    }
-    $scope.toggleLeft = buildToggler('left');
+    // function buildToggler(componentId) {
+    //     return function() {
+    //         $mdSidenav(componentId).toggle();
+    //     };
+    // }
+    // $scope.toggleLeft = buildToggler('left');
 }]);

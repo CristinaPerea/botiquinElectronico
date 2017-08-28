@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module("app").controller("LoginController", ['$scope', '$http', 'ApiService', function($scope, $http, ApiService) {
+
+    // Función onInit del componente, comprueba que el usuario tiene sesión
     this.$onInit = function() {
         ApiService.checkToken();
         if (ApiService.tieneSesion()) {
@@ -10,11 +12,14 @@ angular.module("app").controller("LoginController", ['$scope', '$http', 'ApiServ
 
     $scope.muestraFormulario = false;
 
+    // Función que muestra el formulario de login
     $scope.muestraLogin = function() {
         $scope.muestraFormulario = !$scope.muestraFormulario;
     };
+
     $scope.user = {};
 
+    // Función que realiza el login del usuario con los datos pasados en el formulario
     $scope.login = function() {
         ApiService.login($scope.user.name, $scope.user.password).then(function(success) {
             $scope.token = success.data.token;

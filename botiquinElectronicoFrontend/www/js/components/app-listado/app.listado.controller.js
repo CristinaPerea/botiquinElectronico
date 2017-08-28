@@ -2,14 +2,16 @@
 
 angular.module("app").controller("ListadoProductosController", ['$scope', 'ApiService', '$mdDialog', function($scope, ApiService, $mdDialog) {
 
+    // Función onInit del componente.
     this.$onInit = function() {
         $scope.resultados = this.resultados;
     };
 
+    // Función que cierra el diálogo de detalle.
     $scope.closeDialog = function() {
         $mdDialog.hide();
     };
-
+    // Función que abre el popup de detalles de un producto.
     $scope.abrirDetalle = function(ev, id) {
         $scope.id = id;
         $mdDialog.show(

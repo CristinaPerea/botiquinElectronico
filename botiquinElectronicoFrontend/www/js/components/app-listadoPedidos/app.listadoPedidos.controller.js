@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module("app").controller("ListadoPedidosController", ['$http', '$scope', 'ApiService', 'Sesion', '$mdDialog', function($http, $scope, ApiService, Sesion, $mdDialog) {
+
+    // Función onInit del componente
     this.$onInit = function() {
         $scope.pedidos = this.pedidos;
     };
 
+    // Función que muestra los pedidos asociados a un usuario y también los productos que tienen dichos pedidos
     $scope.verProductos = function(id) {
         $scope.idSeleccionado = id;
         $scope.idProductosDePedidoSeleccionado = [];
@@ -25,10 +28,10 @@ angular.module("app").controller("ListadoPedidosController", ['$http', '$scope',
                     id: success.data.id,
                     nombre: success.data.nombre_producto
                 };
-
                 $scope.productosDePedidoSeleccionado.push(producto);
             });
         }
+        // Productos de un pedido que se encuentran en la lista de pendientes
         $scope.productosDePedidoSeleccionadoEnPendientes = [];
         ApiService.getProductosDePedidosSinRecetaEnPendiente(id).then(function (success) {
             for(var i = 0; i < success.data.length; i++) {
@@ -38,17 +41,18 @@ angular.module("app").controller("ListadoPedidosController", ['$http', '$scope',
                         id: success.data.id,
                         nombre: success.data.nombre_producto
                     };
-
                     $scope.productosDePedidoSeleccionadoEnPendientes.push(producto);
                 });
             }
         });
     };
 
+    // Función que cierra el popup de detalle
     $scope.closeDialog = function() {
         $mdDialog.hide();
     };
 
+    // Función para ver los detalles de un prodcuto dado un id ( abre un popup)
     $scope.verDetallesProducto = function(ev, id) {
         console.log('Entro en detalle de producto');
         $scope.id = id;
