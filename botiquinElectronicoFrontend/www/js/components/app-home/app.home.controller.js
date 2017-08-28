@@ -9,11 +9,35 @@ angular.module("app").controller("HomeController", ['ApiService', '$scope', 'Ses
                 $scope.pedidosSin = success.data;
                 ApiService.getPedidosCon($scope.idUsuario).then(function (success) {
                     $scope.pedidosCon = success.data;
+                    $scope.compruebaFechaExpiración();
                     $scope.fullRender = true;
                 });
             });
         });
-        $scope.showSimpleToast();
+
+    };
+
+    $scope.compruebaFechaExpiración= function () {
+        console.log(new Date());
+        var encontrado = false;
+        for(var pedido in $scope.pedidosCon) {
+            var i = 0;
+            while(i < $scope.pedidosCon[pedido].productos_en_stock.length && !encontrado) {
+                var productoEnStock = $scope.pedidosCon[pedido].productos_en_stock[i];
+                var fechaActual = $scope.formateaFecha(new Date());
+                if (productoEnStock.fecha_expiracion === fechaActual){
+                    $scope.showSimpleToast();
+                    encontrado = true;
+                } else {
+                    i++;
+                }
+            }
+        }
+    };
+
+    $scope.formateaFecha = function (fecha) {
+        var fechaActual = fecha.getFullYear() + '-' + ('0' + (fecha.getMonth() + 1)).slice(-2) + '-' + ('0' + fecha.getDate()).slice(-2);
+        return fechaActual;
     };
     var last = {
         bottom: false,
@@ -27,7 +51,7 @@ angular.module("app").controller("HomeController", ['ApiService', '$scope', 'Ses
 
         $mdToast.show(
             $mdToast.simple()
-                .textContent('¡Tienes productos por recoger de tus tratamientos!')
+                .textContent('¡Tienes productos de tu tratamiento por recoger!')
                 .position(pinTo )
                 .hideDelay(3000)
         );
