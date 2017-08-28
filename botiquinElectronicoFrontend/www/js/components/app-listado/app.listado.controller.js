@@ -29,5 +29,5 @@ angular.module("app").controller("ListadoProductosController", ['$scope', 'ApiSe
                 .ok('Cerrar')
                 .targetEvent(ev)
         );
-    }
+    };
 }]);

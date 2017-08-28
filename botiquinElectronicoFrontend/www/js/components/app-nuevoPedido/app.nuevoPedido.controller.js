@@ -9,5 +9,4 @@ angular.module("app").controller("NuevoPedidoController", ['$http', '$scope', 'A
         console.log('Vuelvo al home');
         $state.go('home');
     };
-
 }]);
