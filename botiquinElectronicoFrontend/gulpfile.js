@@ -1,4 +1,7 @@
 "use strict";
+
+// Dependencias
+
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var livereload = require('gulp-livereload');
@@ -9,30 +12,28 @@ var inject = require('gulp-inject');
 var del = require('del');
 var wait = require('gulp-wait');
 
+// Variables globales
+
 var watchGlob = 'index.html';
 var resources = 'www/**/*.{js,html,css}';
 var iosDest = 'platforms/browser/';
 var libreriasCSS = ['node_modules/angular-material/angular-material.css',
     'node_modules/material-design-icons/iconfont/*'];
-
 var injectOrderLibreriasCSS = ['www/vendor/material-icons.css',
     'www/vendor/angular-material.css',
     'www/vendor/MaterialIcons*'];
-
 var librerias = ['node_modules/@uirouter/angularjs/release/angular-ui-router.js',
     'node_modules/angular/angular.js',
     'node_modules/angular-animate/angular-animate.js',
     'node_modules/angular-aria/angular-aria.js',
     'node_modules/angular-messages/angular-messages.js',
     'node_modules/angular-material/angular-material.js'];
-
 var injectOrderLibrerias = ['www/vendor/angular.js',
     'www/vendor/angular-animate.js',
     'www/vendor/angular-aria.js',
     'www/vendor/angular-messages.js',
     'www/vendor/angular-ui-router.js',
     'www/vendor/angular-material.js'];
-
 var DIST_PATH = ['platforms/browser/www', 'platforms/browser/index.html'];
 
 gulp.task('clean', function() {
@@ -42,7 +43,7 @@ gulp.task('clean', function() {
 
 gulp.task('update', function() {
     return gulp.src(resources)
-           .pipe(gulp.dest(iosDest + '/www'))
+        .pipe(gulp.dest(iosDest + '/www'))
         .pipe(wait(1500))
         .pipe(livereload());
 });
@@ -56,12 +57,10 @@ gulp.task('prepararLibreriasCSS', function() {
 });
 
 gulp.task('updateIndex', function() {
-    console.log('updating index...');
     return gulp.src(watchGlob).pipe(gulp.dest(iosDest));
 });
 
 gulp.task('indexJS', ['prepararLibrerias'], function () {
-    console.log('Generating JS');
     var target = gulp.src('./platforms/browser/index.html');
     var appJS = ['./www/js/*.module.js',
         './www/js/*.router.js',
@@ -76,7 +75,6 @@ gulp.task('indexJS', ['prepararLibrerias'], function () {
 });
 
 gulp.task('indexJSSinLibrerias', function () {
-    console.log('Generating JS');
     var target = gulp.src('./platforms/browser/index.html');
     var appJS = ['./www/js/*.module.js',
         './www/js/*.router.js',
@@ -95,7 +93,6 @@ gulp.task('copiaFuentesMaterial', function() {
 });
 
 gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial'], function() {
-    console.log('Generating Sass');
     var target = gulp.src('./platforms/browser/index.html');
     var appCSS = ['./www/css/*.css', './www/js/**/*.css'];
     var injectCSS = injectOrderLibreriasCSS.concat(appCSS);
@@ -105,7 +102,6 @@ gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial'], functio
 });
 
 gulp.task('indexSASSSinLibrerias', function() {
-    console.log('Generating Sass');
     var target = gulp.src('./platforms/browser/index.html');
     var appCSS = ['./www/**/*.css', './www/js/**/*.css'];
     var injectCSS = injectOrderLibreriasCSS.concat(appCSS);
@@ -122,7 +118,7 @@ gulp.task('watch', function() {
 
 gulp.task('copiarImagenes', function () {
    return gulp.src('./www/img/**/*')
-       .pipe(gulp.dest('./platforms/browser/www/img/'))
+       .pipe(gulp.dest('./platforms/browser/www/img/'));
 });
 gulp.task('server', ['clean', 'copiarImagenes', 'updateIndex', 'indexJS', 'indexSASS'], function() {
     var port = 8080;
