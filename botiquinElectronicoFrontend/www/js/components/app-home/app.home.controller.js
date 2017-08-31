@@ -25,14 +25,16 @@ angular.module("app").controller("HomeController", ['ApiService', '$scope', 'Ses
     $scope.compruebaFechaExpiración= function () {
         var encontrado = false;
         var i = 0;
-        while(i < $scope.pedidosCon[0].productos_en_stock.length && !encontrado) {
-            var productoEnStock = $scope.pedidosCon[0].productos_en_stock[i];
-            var fechaActual = $scope.formateaFecha(new Date());
-            if (productoEnStock.fecha_expiracion === fechaActual){
-                $scope.showSimpleToast();
-                encontrado = true;
-            } else {
-                i++;
+        if ($scope.pedidosCon.length) {
+            while(i < $scope.pedidosCon[0].productos_en_stock.length && !encontrado) {
+                var productoEnStock = $scope.pedidosCon[0].productos_en_stock[i];
+                var fechaActual = $scope.formateaFecha(new Date());
+                if (productoEnStock.fecha_expiracion === fechaActual){
+                    $scope.showSimpleToast();
+                    encontrado = true;
+                } else {
+                    i++;
+                }
             }
         }
     };

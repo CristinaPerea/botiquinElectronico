@@ -5,9 +5,8 @@ angular.module("app").controller("NuevoPedidoController", ['$http', '$scope', 'A
         $scope.pedido = this.pedido;
     };
 
-    // Función que devuelve al usuario a la pantalla de pedidos
+    // Función que devuelve al usuario a la pantalla de histórico de pedidos
     $scope.goHome = function () {
-        console.log('Vuelvo al home');
         $state.go('home');
     };
 }]);

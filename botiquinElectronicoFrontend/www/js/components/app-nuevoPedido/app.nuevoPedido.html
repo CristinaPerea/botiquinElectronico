@@ -1,6 +1,6 @@
 <div layout="row">
-    <h3 layout-margin="10px" flex="90" style="padding-top: 10px;">Pedido creado el {{pedido.fecha_pedido | date: 'dd-MM-yyyy'}}</h3>
-    <md-button ng-click="goHome()">
+    <h3 layout-margin="10px" flex="90" class="nuevo-pedido-textoPedidoCreado">Pedido creado el {{pedido.fecha_pedido | date: 'dd-MM-yyyy'}}</h3>
+    <md-button data-ng-click="goHome()">
         <md-icon>
             <i class="material-icons">save</i>
         </md-icon>

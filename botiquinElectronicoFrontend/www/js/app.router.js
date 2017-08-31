@@ -1,3 +1,5 @@
+"use strict";
+
 angular.module('app').config(function($stateProvider, $mdThemingProvider) {
     $mdThemingProvider.theme('default')
         .primaryPalette('blue')

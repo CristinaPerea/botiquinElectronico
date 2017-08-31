@@ -1,0 +1,18 @@
+.detalle-producto-nombre-producto {
+  font-size: 20px; }
+
+.detalle-producto-foto-producto {
+  height: 100px;
+  width: 100px; }
+
+.detalle-producto-precio {
+  font-size: 18px;
+  font-weight: bold; }
+
+.detalle-producto-textoConReceta {
+  font-size: 18px;
+  font-weight: bold; }
+
+.detalle-producto-imagen-check {
+  height: 23px;
+  width: 23px; }

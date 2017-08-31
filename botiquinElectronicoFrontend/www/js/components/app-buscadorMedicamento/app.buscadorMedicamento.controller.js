@@ -36,7 +36,6 @@ angular.module("app").controller("BuscadorMedicamentoController", ['$scope', 'Ap
       ApiService.getProductoEnStock(id).then(function (success) {
           // Se busca el producto por su id en la api de productos en stock
           // Si no se encuentra el producto, se debe crear en la api de prodcutos pendientes
-         //console.log(success.data);
          if (success.data.length === 0) {
              ApiService.creaPendiente($scope.pedido.fecha_pedido, id, $scope.pedido.id).then(function (success) {
                 $scope.resultado = 'Su producto está pendiente de stock';
@@ -47,12 +46,11 @@ angular.module("app").controller("BuscadorMedicamentoController", ['$scope', 'Ap
              var i = 0;
              while (i < success.data.length && !encontrado) {
                  if ((success.data[i].id_pedido_con_receta) === null && (success.data[i].id_pedido_sin_receta) === null) {
-                     console.log(success.data[i]);
                      encontrado = true;
                      ApiService.meteProductoAPedido($scope.pedido.id, success.data[i].id).then(function (success) {
                          $scope.resultado = 'Su producto se ha introducido';
                          $scope.actualizaCarrito(success.data, true);
-                     })
+                     });
                  } else {
                      i++;
                  }
@@ -80,7 +78,6 @@ angular.module("app").controller("BuscadorMedicamentoController", ['$scope', 'Ap
     // Función que borra el producto del stock
     $scope.borraDeStock = function(id) {
         ApiService.borraProductoEnStock(id).then(function(success) {
-            console.log("Borrado " + id + " de stock");
             $scope.borraProductoDeCarrito(id);
         });
     };
@@ -88,7 +85,6 @@ angular.module("app").controller("BuscadorMedicamentoController", ['$scope', 'Ap
     // Función que borra un producto de la lista de pendientes
     $scope.borraDePendientes = function(id) {
         ApiService.borraProductoEnPendientes(id).then(function(success) {
-            console.log("Borrado " + id + " de pendientes");
             $scope.borraProductoDeCarrito(id);
         });
     };
@@ -106,5 +102,4 @@ angular.module("app").controller("BuscadorMedicamentoController", ['$scope', 'Ap
             }
         }
     };
-
 }]);

@@ -1,0 +1,15 @@
+.root-main-controller {
+  height: 100%; }
+
+.root-profile-background {
+  background-image: url("/www/img/halftone-azul.jpg");
+  padding: 4%; }
+
+.root-foto {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+  border: 1px solid black; }
+
+.root-texto-bienvenida {
+  text-shadow: #444444; }

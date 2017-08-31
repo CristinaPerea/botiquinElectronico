@@ -1,15 +1,15 @@
 <div>
     <h3>Pedidos sin receta</h3>
     <md-list flex>
-        <md-list-item class="md-3-line md-padding" ng-repeat="pedido in pedidosSin track by pedido.id" ng-click="verProductos(pedido.id)">
+        <md-list-item class="md-3-line md-padding" data-ng-repeat="pedido in pedidosSin track by pedido.id" data-ng-click="verProductos(pedido.id)">
             <div class="md-list-item-text md-padding" layout="column">
                 <div layout="row">
                     <h3 flex="90">Pedido realizado el {{ pedido.fecha_pedido | date:'dd/MM/yyyy'}}</h3>
                     <i class="material-icons">expand_more</i>
                 </div>
-                <div ng-show="pedido.id == idSeleccionado" layout="row">
-                    <md-button ng-repeat="producto in productosDePedidoSeleccionado track by producto.id"
-                                   ng-click="verDetallesProducto($event, producto.id)">
+                <div data-ng-show="pedido.id == idSeleccionado" layout="row">
+                    <md-button data-ng-repeat="producto in productosDePedidoSeleccionado track by producto.id"
+                                   data-ng-click="verDetallesProducto($event, producto.id)">
                         {{ producto.nombre }}
                     </md-button>
                 </div>

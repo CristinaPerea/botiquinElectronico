@@ -12,7 +12,7 @@ class ClientePermission(BasePermission):
 
         #if view.action == "create":
         #    return True
-        if request.user.is_authenticated():
+        if request.user.is_authenticated() or request.method == 'POST':
             return True
         # elif view.action in ['retrieve', 'list']:
         #     return True

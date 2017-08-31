@@ -1,40 +1,40 @@
-angular
-    .module('app')
-    .controller('AppCtrl', function ($scope, $timeout, $mdSidenav, ApiService, $state, Sesion) {
-        $scope.toggleLeft = buildToggler('left');
-        $scope.toggleRight = buildToggler('right');
-        $scope.tengoToken = false;
+"use strict";
 
-        function buildToggler(componentId) {
-            return function() {
-                $mdSidenav(componentId).toggle();
-            };
-        }
+angular.module('app').controller('AppCtrl', function ($scope, $timeout, $mdSidenav, ApiService, $state, Sesion) {
+    $scope.toggleLeft = buildToggler('left');
+    $scope.toggleRight = buildToggler('right');
+    $scope.tengoToken = false;
 
-        $scope.$on('token', function(event, data) {
-            if(data) {
-                $scope.actualizarEstadoToken(data);
-                ApiService.getUserByUsername(Sesion.username).then(function(success) {
-                    $scope.profile = success.data;
-                });
-                $state.go('home');
-            }
-        });
+    function buildToggler(componentId) {
+        return function() {
+            $mdSidenav(componentId).toggle();
+        };
+    }
 
-        $scope.logout = function() {
-            ApiService.logout().then(function(success) {
-                $scope.toggleLeft();
-                ApiService.clearLocalStorage();
-                $scope.actualizarEstadoToken(false);
-            },
-            function( resultado ) {
-                $scope.toggleLeft();
-                ApiService.clearLocalStorage();
-                $scope.actualizarEstadoToken(false);
+    $scope.$on('token', function(event, data) {
+        if(data) {
+            $scope.actualizarEstadoToken(data);
+            ApiService.getUserByUsername(Sesion.username).then(function(success) {
+                $scope.profile = success.data;
             });
-        };
-
-        $scope.actualizarEstadoToken = function(estado) {
-            $scope.tengoToken = estado;
-        };
+            $state.go('home');
+        }
     });
+
+    $scope.logout = function() {
+        ApiService.logout().then(function(success) {
+            $scope.toggleLeft();
+            ApiService.clearLocalStorage();
+            $scope.actualizarEstadoToken(false);
+        },
+        function( resultado ) {
+            $scope.toggleLeft();
+            ApiService.clearLocalStorage();
+            $scope.actualizarEstadoToken(false);
+        });
+    };
+
+    $scope.actualizarEstadoToken = function(estado) {
+        $scope.tengoToken = estado;
+    };
+});

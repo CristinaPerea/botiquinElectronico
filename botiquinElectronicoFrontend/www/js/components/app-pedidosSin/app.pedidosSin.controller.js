@@ -40,7 +40,6 @@ angular.module("app").controller("PedidosSinController", ['$http', '$scope', 'Ap
     };
 
     $scope.verDetallesProducto = function(ev, id) {
-        console.log('Entro en detalle de producto');
         $scope.id = id;
         $mdDialog.show(
             $mdDialog.alert({

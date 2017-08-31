@@ -2,25 +2,113 @@
     <img src="./www/img/pill_icon-icons.com_53621.png" alt="pharma_logo">
 </div>
 <br>
-<div ng-if="muestraFormulario" class="animate-if">
-    <md-input-container class="md-icon-float md-block">
-        <!-- Username -->
-        <md-icon>
-            <i class="material-icons">person</i>
-        </md-icon>
-        <input ng-model="user.name" type="text" placeholder="Nombre de usuario">
-    </md-input-container>
-    <md-input-container class="md-icon-float md-block">
-        <!-- Password -->
-        <md-icon>
-            <i class="material-icons">security</i>
-        </md-icon>
-        <input ng-model="user.password" type="password" placeholder="Password">
-    </md-input-container>
-    <div layout="row" layout-align="center center">
-        <md-button class="md-raised md-primary" data-ng-click="login()">Entrar</md-button>
+<div>
+    <div data-ng-if="muestraFormulario">
+        <md-input-container class="md-icon-float md-block">
+            <!-- Username -->
+            <md-icon>
+                <i class="material-icons">person</i>
+            </md-icon>
+            <input data-ng-model="user.name" type="text" placeholder="Nombre de usuario" ng-class="{'login-error-input': erroresLogeando.non_field_errors[0]}">
+        </md-input-container>
+        <md-input-container class="md-icon-float md-block">
+            <!-- Password -->
+            <md-icon>
+                <i class="material-icons">security</i>
+            </md-icon>
+            <input data-ng-model="user.password" type="password" placeholder="Password" ng-class="{'login-error-input': erroresLogeando.non_field_errors[0]}">
+            <div ng-if="erroresLogeando.length != 0">
+                <div ng-message="erroresLogeando.non_field_errors" class="login-error">
+                    {{ erroresLogeando.non_field_errors[0] }}
+                </div>
+            </div>
+        </md-input-container>
+        <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" data-ng-click="login()">Entrar</md-button>
+        </div>
+        <br>
+        <br>
+        <div layout="row" layout-align="center center">
+            <md-button class="md-raised md-primary" data-ng-click="muestraRegistro()">Crear cuenta</md-button>
+        </div>
+    </div>
+    <div data-ng-if="muestraFormularioRegistro">
+        <form>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.first_name[0]}">Nombre</label>
+                <input data-ng-model="crearusuario.first_name" ng-class="{'login-error-input': erroresCreandoUsuario.first_name[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.first_name" class="login-error">
+                        {{ erroresCreandoUsuario.first_name[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.last_name[0]}">Apellidos</label>
+                <input data-ng-model="crearusuario.last_name" ng-class="{'login-error-input': erroresCreandoUsuario.last_name[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.last_name" class="login-error">
+                        {{ erroresCreandoUsuario.last_name[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.username[0]}">Nombre de usuario</label>
+                <input data-ng-model="crearusuario.username" ng-class="{'login-error-input': erroresCreandoUsuario.username[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.username" class="login-error">
+                        {{ erroresCreandoUsuario.username[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.email[0]}">Correo electrónico</label>
+                <input data-ng-model="crearusuario.email" ng-class="{'login-error-input': erroresCreandoUsuario.email[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.email" class="login-error">
+                        {{ erroresCreandoUsuario.email[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.password[0]}">Contraseña</label>
+                <input data-ng-model="crearusuario.password" ng-class="{'login-error-input': erroresCreandoUsuario.password[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.password" class="login-error">
+                        {{ erroresCreandoUsuario.password[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.direccion[0]}">Direccion</label>
+                <input data-ng-model="crearusuario.direccion" ng-class="{'login-error-input': erroresCreandoUsuario.direccion[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.direccion" class="login-error">
+                        {{ erroresCreandoUsuario.direccion[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.edad[0]}">Edad</label>
+                <input data-ng-model="crearusuario.edad" type="number" ng-class="{'login-error-input': erroresCreandoUsuario.edad[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.edad" class="login-error">
+                        {{ erroresCreandoUsuario.edad[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <md-input-container class="md-block" flex-gt-sm>
+                <label ng-class="{'login-error': erroresCreandoUsuario.foto[0]}">Foto</label>
+                <input data-ng-model="crearusuario.foto" ng-class="{'login-error-input': erroresCreandoUsuario.foto[0]}">
+                <div ng-if="erroresCreandoUsuario.length != 0">
+                    <div ng-message="erroresCreandoUsuario.foto" class="login-error">
+                        {{ erroresCreandoUsuario.foto[0] }}
+                    </div>
+                </div>
+            </md-input-container>
+            <div layout="row" layout-align="center center">
+                <md-button class="md-raised md-primary" data-ng-click="creaUsuario()">Crear</md-button>
+            </div>
+        </form>
     </div>
 </div>
-<!--<p>Token de sesión: </p>-->
-<!--<p>{{ token }}</p>-->
-<!--{{ resultado | json }}-->

@@ -14,7 +14,6 @@ angular.module("app").controller("ListadoPedidosController", ['$http', '$scope',
         for(var pedido in $scope.pedidos) {
             if($scope.pedidos[pedido].id === id) {
                 $scope.productosDePedido = $scope.pedidos[pedido].productos_en_stock;
-                console.log($scope.productosDePedido);
                 for(var producto in $scope.productosDePedido){
                     $scope.idProductosDePedidoSeleccionado.push($scope.productosDePedido[producto].id_producto);
                 }
@@ -54,7 +53,6 @@ angular.module("app").controller("ListadoPedidosController", ['$http', '$scope',
 
     // Función para ver los detalles de un prodcuto dado un id ( abre un popup)
     $scope.verDetallesProducto = function(ev, id) {
-        console.log('Entro en detalle de producto');
         $scope.id = id;
         $mdDialog.show(
             $mdDialog.alert({

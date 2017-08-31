@@ -1,5 +1,4 @@
-<div ng-controller="AppCtrl" layout="row" ng-cloak style="height: 100%" id="rootElement">
-
+<div data-ng-controller="AppCtrl" layout="row" ng-cloak class="root-main-controller" id="rootElement">
     <section layout="row" flex>
         <md-sidenav class="md-sidenav-left" md-component-id="left"
                     md-whiteframe="4">
@@ -9,18 +8,19 @@
             </md-toolbar>
 
             <md-content layout="column">
-                <div layout="column" style="background-image: url('/www/img/halftone-azul.jpg'); padding: 4%;">
+                <div layout="column" class="root-profile-background">
                     <div>
-                        <img ng-src="{{ profile.foto }}" style="height:50px; width: 50px; border-radius: 100%;">
+                        <img ng-src="{{ profile.foto }}" class="root-foto">
                     </div>
                     <div>
-                        <p>Bienvenido {{ profile.first_name}}  {{profile.last_name }}</p>
+                        <p class="root-texto-bienvenida">Bienvenid@ {{ profile.first_name}}  {{profile.last_name }}</p>
                     </div>
                 </div>
                 <div layout="column">
+                    <br>
                     <div>
                         <a ui-sref="home">
-                            <md-button class="md-accent">Inicio</md-button>
+                            <md-button class="md-accent">Resumen de pedidos</md-button>
                         </a>
                     </div>
                     <div>

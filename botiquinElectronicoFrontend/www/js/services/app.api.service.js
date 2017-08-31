@@ -1,8 +1,10 @@
+"use strict";
+
 angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function($http, urls, Sesion) {
 
     // Llamada a la API para hacer el login en la aplicación con las credenciales
     this.login = function(username, password) {
-        json = {
+        var json = {
             username: username,
             password: password
         };
@@ -139,7 +141,9 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
         return $http(creaPeticion('DELETE', urls.rutaApiCrearPendiente, null, idProductoEnPendientes));
     };
 
-
+    this.creaUsuario = function(usuario) {
+        return $http(creaPeticion('POST', urls.rutaApiCrearUsuario, usuario, null));
+    };
 
     this.creaPendiente = function (fechaPedido, idProducto, idPedidoSin) {
       var datos = {
@@ -154,14 +158,12 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
 
     function creaPeticion(metodo, ruta, datos, argumentoUrl) {
         var peticion = {};
-        token = "Token " + Sesion.token;
-
-        cabecera = {
+        var token = "Token " + Sesion.token;
+        var cabecera = {
             'Authorization' : token
         };
-
-        url = (argumentoUrl == undefined) ? urls.protocol+"://"+urls.host+"/"+ruta : urls.protocol+"://"+urls.host+"/"+ruta+argumentoUrl+"/";
-        if (datos == undefined) {
+        var url = (argumentoUrl == undefined) ? urls.protocol+"://"+urls.host+"/"+ruta : urls.protocol+"://"+urls.host+"/"+ruta+argumentoUrl+"/";
+        if (datos === undefined) {
             peticion = {
                 url:url,
                 method: metodo,
@@ -175,6 +177,11 @@ angular.module("app").service("ApiService", ["$http", "urls", "Sesion", function
                 headers : cabecera,
                 data : datos
             };
+        }
+
+        // Para las rutas no autenticadas, elimnamos las cabeceras (con el Token)
+        if ((ruta === urls.rutaApiCrearUsuario)) {
+            delete peticion.headers;
         }
 
         return peticion;

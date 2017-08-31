@@ -1,27 +1,26 @@
 <div data-ng-if="!producto.foto_producto" layout="row" layout-align="center center">
-    <md-progress-circular ng-disabled="!producto.foto_producto" class="md-hue-2" md-diameter="50px"></md-progress-circular>
+    <md-progress-circular data-ng-disabled="!producto.foto_producto" class="md-hue-2" md-diameter="50px"></md-progress-circular>
 </div>
-<div layout="column" layout-margin="15px" ng-if="producto.foto_producto">
-
+<div layout="column" layout-margin="15px" data-ng-if="producto.foto_producto">
     <div layout="column">
         <div layout="row">
             <div layout="row" flex="70" layout-align="center center">
-                <p style="font-size: 20px;">{{producto.nombre_producto}}</p>
+                <p class="detalle-producto-nombre-producto">{{producto.nombre_producto}}</p>
             </div>
             <div flex="30">
-                <img ng-src="{{producto.foto_producto}}" style="height:100px; width: 100px;">
+                <img data-ng-src="{{producto.foto_producto}}" class="detalle-producto-foto-producto">
             </div>
         </div>
         <div>
-            <span style="font-size: 18px; font-weight: bold;">Precio:</span> {{producto.precio}}
+            <span class="detalle-producto-precio">Precio:</span> {{producto.precio}}
         </div>
         <div>
-            <span style="font-size: 18px; font-weight: bold;">Con receta:</span>
-            <span ng-if="producto.con_receta">
-                <img ng-src="./www/img/check.png" style="height:23px; width: 23px;">
+            <span class="detalle-producto-textoConReceta">Con receta:</span>
+            <span data-ng-if="producto.con_receta">
+                <img class="detalle-producto-imagen-check" data-ng-src="./www/img/check.png">
             </span>
-            <span ng-if="!producto.con_receta">
-                <img ng-src="./www/img/wrong.png" style="height:23px; width: 23px;">
+            <span data-ng-if="!producto.con_receta">
+                <img class="detalle-producto-imagen-check" data-ng-src="./www/img/wrong.png">
             </span>
         </div>
         <div>

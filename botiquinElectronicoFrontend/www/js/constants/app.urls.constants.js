@@ -1,3 +1,5 @@
+"use strict";
+
 angular.module("app").constant("urls", {
     "protocol" : "http",
     "host" : "localhost:8000",
@@ -13,5 +15,6 @@ angular.module("app").constant("urls", {
     "rutaApiPedidosConReceta" : "api/v1/pedidos_con_receta/?cliente__id=",
     "rutaApiCrearPedido" : "api/v1/pedidos_sin_receta/",
     "rutaApiCrearPendiente" : "api/v1/productos/pendientes/",
-    "rutaApiPendientesPorIdDePedidoSinReceta" : "api/v1/productos/pendientes/?id_pedido_sin_receta="
+    "rutaApiPendientesPorIdDePedidoSinReceta" : "api/v1/productos/pendientes/?id_pedido_sin_receta=",
+    "rutaApiCrearUsuario" : "api/v1/users/"
 });

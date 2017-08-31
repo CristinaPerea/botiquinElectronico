@@ -11,11 +11,12 @@ var ecstatic = require('ecstatic');
 var inject = require('gulp-inject');
 var del = require('del');
 var wait = require('gulp-wait');
+var sass = require('gulp-sass');
 
 // Variables globales
 
 var watchGlob = 'index.html';
-var resources = 'www/**/*.{js,html,css}';
+var resources = 'www/**/*.{js,html,css,sass}';
 var iosDest = 'platforms/browser/';
 var libreriasCSS = ['node_modules/angular-material/angular-material.css',
     'node_modules/material-design-icons/iconfont/*'];
@@ -92,7 +93,7 @@ gulp.task('copiaFuentesMaterial', function() {
     return gulp.src(['./www/vendor/Material*.*']).pipe(gulp.dest('./platforms/browser/www/vendor'));
 });
 
-gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial'], function() {
+gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial', 'compilaSass'], function() {
     var target = gulp.src('./platforms/browser/index.html');
     var appCSS = ['./www/css/*.css', './www/js/**/*.css'];
     var injectCSS = injectOrderLibreriasCSS.concat(appCSS);
@@ -101,7 +102,7 @@ gulp.task('indexSASS', ['prepararLibreriasCSS', 'copiaFuentesMaterial'], functio
         .pipe(gulp.dest('./platforms/browser/'));
 });
 
-gulp.task('indexSASSSinLibrerias', function() {
+gulp.task('indexSASSSinLibrerias', ['compilaSass'], function() {
     var target = gulp.src('./platforms/browser/index.html');
     var appCSS = ['./www/**/*.css', './www/js/**/*.css'];
     var injectCSS = injectOrderLibreriasCSS.concat(appCSS);
@@ -110,6 +111,13 @@ gulp.task('indexSASSSinLibrerias', function() {
         .pipe(gulp.dest('./platforms/browser/'));
 });
 
+gulp.task('compilaSass', function() {
+    return gulp.src('./www/js/**/*.sass')
+        .pipe(sass())
+        .pipe(gulp.dest(function (file) {
+            return file.base;
+        }));
+});
 
 gulp.task('watch', function() {
     livereload.listen();

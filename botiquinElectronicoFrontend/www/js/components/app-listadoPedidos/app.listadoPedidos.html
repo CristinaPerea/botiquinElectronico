@@ -1,26 +1,26 @@
 <div>
     <md-list flex>
-        <md-list-item class="md-3-line md-padding" ng-repeat="pedido in (pedidos | orderBy: '-pedido.fecha_pedido':true) track by pedido.id " ng-click="verProductos(pedido.id)">
+        <md-list-item class="md-3-line md-padding" data-ng-repeat="pedido in (pedidos | orderBy: '-pedido.fecha_pedido':true) track by pedido.id " ng-click="verProductos(pedido.id)">
             <div class="md-list-item-text md-padding" layout="column">
                 <div layout="row">
-                    <h3 flex="90" ng-if="pedido.fecha_pedido">Pedido realizado el {{ pedido.fecha_pedido | date:'dd/MM/yyyy'}}</h3>
-                    <h3 flex="90" ng-if="!pedido.fecha_pedido">Tratamiento en vigor con:</h3>
+                    <h3 flex="90" data-ng-if="pedido.fecha_pedido">Pedido realizado el {{ pedido.fecha_pedido | date:'dd/MM/yyyy'}}</h3>
+                    <h3 flex="90" data-ng-if="!pedido.fecha_pedido">Tratamiento en vigor con:</h3>
                     <i class="material-icons">expand_more</i>
                 </div>
-                <div ng-show="pedido.id == idSeleccionado" layout="column">
-                    <md-button class="md-primary md-raised" ng-repeat="producto in productosDePedidoSeleccionado track by producto.id"
+                <div data-ng-show="pedido.id == idSeleccionado" layout="column">
+                    <md-button class="md-primary md-raised" data-ng-repeat="producto in productosDePedidoSeleccionado track by producto.id"
                                ng-click="verDetallesProducto($event, producto.id)">
                         {{ producto.nombre }}
                     </md-button>
                 </div>
-                <div ng-show="pedido.id == idSeleccionado" layout="column">
+                <div data-ng-show="pedido.id == idSeleccionado" layout="column">
                     <md-button class="md-warn md-raised" ng-repeat="producto in productosDePedidoSeleccionadoEnPendientes track by producto.id"
-                               ng-click="verDetallesProducto($event, producto.id)">
+                               data-ng-click="verDetallesProducto($event, producto.id)">
                         {{ producto.nombre }}
                     </md-button>
                 </div>
             </div>
-            <md-divider ng-if="!$last"></md-divider>
+            <md-divider data-ng-if="!$last"></md-divider>
         </md-list-item>
     </md-list>
 </div>
