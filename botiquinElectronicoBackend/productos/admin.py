@@ -13,6 +13,7 @@ class ProductoAdmin(admin.ModelAdmin):
     model = Producto
     exclude = []
     search_fields = ('nombre_producto',)
+    ordering = ['nombre_producto']
     icon = '<i class="material-icons">healing</i>'
 
 class PendienteAdmin(admin.ModelAdmin):

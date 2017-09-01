@@ -10,7 +10,7 @@ class PedidosSinReceta(models.Model):
     modificado = models.DateField(auto_now=True)
 
     def __str__(self):
-        return str(self.fecha_pedido) + ' / ' + self.cliente.first_name + self.cliente.last_name
+        return str(self.fecha_pedido) + ' / ' + self.cliente.first_name + ' ' + self.cliente.last_name
 
 # Clase de pedidos con receta
 class PedidosConReceta(models.Model):
@@ -18,4 +18,4 @@ class PedidosConReceta(models.Model):
     pedido_tramitado = models.BooleanField()
 
     def __str__(self):
-        return self.cliente.first_name + self.cliente.last_name
+        return self.cliente.first_name + ' ' + self.cliente.last_name
