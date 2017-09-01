@@ -49,6 +49,12 @@ INSTALLED_APPS = [
     # CORS
     'corsheaders',
     'django_filters',
+    # Celery Cron
+    'django_cron',
+]
+
+CRON_CLASSES = [
+    "botiquinElectronicoBackend.jobs.MyCronJob"
 ]
 
 MIDDLEWARE = [
