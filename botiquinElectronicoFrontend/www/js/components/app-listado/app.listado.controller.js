@@ -1,10 +1,14 @@
 'use strict';
 
-angular.module("app").controller("ListadoProductosController", ['$scope', 'ApiService', '$mdDialog', function($scope, ApiService, $mdDialog) {
+angular.module("app").controller("ListadoProductosController", ['$scope', 'ApiService', '$mdDialog', '$sce', function($scope, ApiService, $mdDialog, $sce) {
 
     // Función onInit del componente.
     this.$onInit = function() {
         $scope.resultados = this.resultados;
+        for(var i=0; i < $scope.resultados.length; i++) {
+            var descripcion_html = $sce.trustAsHtml($scope.resultados[i].descripcion);
+            $scope.resultados[i].trustedDescripcion = descripcion_html;
+        }
     };
 
     // Función que cierra el diálogo de detalle.

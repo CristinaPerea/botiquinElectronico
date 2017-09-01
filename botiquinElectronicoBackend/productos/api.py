@@ -108,9 +108,9 @@ class BuscaProspectoAPI(APIView):
         parser = QueryParser("descripcion", ix.schema)
         myquery = parser.parse(busqueda)
         results = searcher.search(myquery, limit=50)
-        results.fragmenter.maxchars = 300
+        results.fragmenter.maxchars = 100
         # Muestra mas contenido por delante y por detras del fragmento
-        results.fragmenter.surround = 150
+        results.fragmenter.surround = 20
 
         formatted_results = []
         for hit in results:

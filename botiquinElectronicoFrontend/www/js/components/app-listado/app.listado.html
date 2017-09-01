@@ -3,7 +3,8 @@
         <md-list-item class="md-3-line" data-ng-repeat="resultado in resultados track by resultado.id" ng-click="abrirDetalle($event, resultado.id)">
             <div class="md-list-item-text" layout="column">
                 <h3>{{ resultado.nombre_producto }}</h3>
-                <h4>{{ resultado.descripcion }}</h4>
+                <h4 ng-bind-html="resultado.trustedDescripcion"></h4>
+                <md-divider></md-divider>
             </div>
         </md-list-item>
     </md-list>
