@@ -4,11 +4,9 @@ from productos.models import Pendiente, ProductoEnStock
 
 
 class MyCronJob(CronJobBase):
-    RUN_EVERY_MINS = 1 # every 2 hours
-
+    RUN_EVERY_MINS = 1 # cada minuto
     schedule = Schedule(run_every_mins=RUN_EVERY_MINS)
-    code = 'botiquinElectronicoBackend.jobs'    # a unique code
-
+    code = 'botiquinElectronicoBackend.jobs'
     def do(self):
         productos_pendientes = Pendiente.objects.all()
         for producto in productos_pendientes:
@@ -17,6 +15,5 @@ class MyCronJob(CronJobBase):
                                                   id_pedido_sin_receta = producto.id_pedido_sin_receta,
                                                   fecha_pedido = producto.fecha_pedido,
                                                   fecha_expiracion = producto.fecha_expiracion)
-            print(producto_para_stock.id_producto)
             producto_para_stock.save()
             producto.delete()
